@@ -1,9 +1,6 @@
 package christmas.controller;
 
-import christmas.domain.Menu;
-import christmas.domain.MenuQuantity;
-import christmas.domain.Order;
-import christmas.domain.ReservationDate;
+import christmas.domain.*;
 import christmas.dto.OrderMenuDto;
 import christmas.handler.InputHandler;
 import christmas.service.OrderService;
@@ -40,5 +37,8 @@ public class GameController {
 
         Integer totalPrice = orderService.getTotalPrice(order);
         outputView.showTotalPrice(totalPrice);
+
+        List<DiscountBenefit> benefits = orderService.getBenefits(order, reservationDate);
+        outputView.showBenefits(benefits);
     }
 }

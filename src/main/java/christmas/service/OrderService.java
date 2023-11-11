@@ -1,8 +1,6 @@
 package christmas.service;
 
-import christmas.domain.Menu;
-import christmas.domain.MenuQuantity;
-import christmas.domain.Order;
+import christmas.domain.*;
 import christmas.dto.OrderMenuDto;
 
 import java.util.List;
@@ -20,5 +18,9 @@ public class OrderService {
 
     public Integer getTotalPrice(Order order) {
         return order.getTotalPrice();
+    }
+
+    public List<DiscountBenefit> getBenefits(Order order, ReservationDate reservationDate) {
+        return order.getDiscountBenefits(reservationDate);
     }
 }
