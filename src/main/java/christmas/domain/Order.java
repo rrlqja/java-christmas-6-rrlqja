@@ -58,7 +58,8 @@ public class Order {
         return 1000;
     }
 
-    public Integer getGiftDiscountMoney(Integer totalPrice) {
+    public Integer getGiftDiscountMoney() {
+        Integer totalPrice = getTotalPrice();
         if (totalPrice >= 120000) {
             return 25000;
         }
@@ -95,6 +96,6 @@ public class Order {
     private int calculateTotalPriceMoney(ReservationDate reservationDate) {
         return getDateDiscountMoney(reservationDate) + getWeekdayDiscountMoney(reservationDate)
                 + getWeekendDiscountMoney(reservationDate) + getStarDayDiscount(reservationDate)
-                + getGiftDiscountMoney(getTotalPrice());
+                + getGiftDiscountMoney();
     }
 }
