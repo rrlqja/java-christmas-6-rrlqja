@@ -39,7 +39,7 @@ public class OutputView {
     }
 
     public void showTotalBenefit(Integer totalBenefit) {
-        System.out.println("\n<총 혜택 금액>");
+        System.out.println("\n<총혜택 금액>");
         System.out.println(formatNumber(totalBenefit) + "원");
     }
 
