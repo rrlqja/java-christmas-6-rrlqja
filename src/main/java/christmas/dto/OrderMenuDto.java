@@ -1,8 +1,5 @@
 package christmas.dto;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 public class OrderMenuDto {
     private final String menuName;
     private final Integer menuQuantity;
