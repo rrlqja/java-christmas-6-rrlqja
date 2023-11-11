@@ -101,7 +101,9 @@ public class Order {
 
         Integer discountMoney = 0;
         for (Menu menu : orders.keySet()) {
-            if (menu.getMenuCategory().equals(menuCategory)) discountMoney += 2023;
+            if (menu.getMenuCategory().equals(menuCategory)) {
+                discountMoney += orders.get(menu).getMenuQuantity() * 2023;
+            }
         }
 
         return discountMoney;
