@@ -4,6 +4,7 @@ import christmas.domain.*;
 import christmas.domain.OrderResult;
 import christmas.handler.InputHandler;
 import christmas.service.OrderService;
+import christmas.utils.InputSupplier;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -24,11 +25,9 @@ public class GameController {
     }
 
     public void startGame() {
-        String reservationDateInput = inputView.getReservationDateInput();
-        ReservationDate reservationDate = inputHandler.toReservationDate(reservationDateInput);
+        ReservationDate reservationDate = getInput(this::getReservationDate);
 
-        String ordersInput = inputView.getOrdersInput();
-        Map<Menu, MenuQuantity> orders = inputHandler.toOrders(ordersInput);
+        Map<Menu, MenuQuantity> orders = getInput(this::getOrders);
 
         Order order = orderService.createOrder(orders);
 
@@ -41,5 +40,25 @@ public class GameController {
         outputView.showTotalBenefit(orderResult.getTotalBenefit());
         outputView.showFinalPrice(orderResult.getFinalPrice());
         outputView.showBadge(orderResult.getBadge());
+    }
+
+    private ReservationDate getReservationDate() {
+        String reservationDateInput = inputView.getReservationDateInput();
+        return inputHandler.toReservationDate(reservationDateInput);
+    }
+
+    private Map<Menu, MenuQuantity> getOrders() {
+        String ordersInput = inputView.getOrdersInput();
+        return inputHandler.toOrders(ordersInput);
+    }
+
+    public <T> T getInput(InputSupplier<T> inputSupplier) {
+        while (true) {
+            try {
+                return inputSupplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
