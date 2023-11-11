@@ -40,5 +40,8 @@ public class GameController {
 
         List<DiscountBenefit> benefits = orderService.getBenefits(order, reservationDate);
         outputView.showBenefits(benefits);
+
+        Integer totalBenefit = orderService.getTotalBenefit(order, reservationDate);
+        outputView.showTotalBenefit(totalBenefit);
     }
 }

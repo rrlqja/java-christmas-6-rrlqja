@@ -23,4 +23,8 @@ public class OrderService {
     public List<DiscountBenefit> getBenefits(Order order, ReservationDate reservationDate) {
         return order.getDiscountBenefits(reservationDate);
     }
+
+    public Integer getTotalBenefit(Order order, ReservationDate reservationDate) {
+        return order.getTotalDiscountMoney(reservationDate);
+    }
 }
