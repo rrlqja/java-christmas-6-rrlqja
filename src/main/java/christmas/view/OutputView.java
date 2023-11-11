@@ -12,4 +12,9 @@ public class OutputView {
             System.out.println(orderMenu.getMenuName() + " " + orderMenu.getMenuQuantity() + "개");
         }
     }
+
+    public void showTotalPrice(Integer totalPrice) {
+        System.out.println("\n<할인 전 총주문 금액>");
+        System.out.println(totalPrice + "원");
+    }
 }

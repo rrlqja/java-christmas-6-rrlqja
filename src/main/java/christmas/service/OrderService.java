@@ -17,4 +17,8 @@ public class OrderService {
     public List<OrderMenuDto> getOrderMenu(Order order) {
         return order.getOrderMenus();
     }
+
+    public Integer getTotalPrice(Order order) {
+        return order.getTotalPrice();
+    }
 }

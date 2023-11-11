@@ -37,6 +37,8 @@ public class GameController {
         Order order = orderService.createOrder(orders);
         List<OrderMenuDto> orderMenu = orderService.getOrderMenu(order);
         outputView.showOrderMenus(orderMenu);
-        
+
+        Integer totalPrice = orderService.getTotalPrice(order);
+        outputView.showTotalPrice(totalPrice);
     }
 }
