@@ -27,4 +27,8 @@ public class OrderService {
     public Integer getTotalBenefit(Order order, ReservationDate reservationDate) {
         return order.getTotalDiscountMoney(reservationDate);
     }
+
+    public Integer getFinalPrice(Order order, ReservationDate reservationDate) {
+        return order.getFinalPrice(reservationDate);
+    }
 }

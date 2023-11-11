@@ -93,6 +93,10 @@ public class Order {
         return totalDiscountMoney;
     }
 
+    public Integer getFinalPrice(ReservationDate reservationDate) {
+        return getTotalPrice() - getTotalDiscountMoney(reservationDate);
+    }
+
     private Integer calculatorWeekDiscountMoney(Predicate<ReservationDate> dateCondition,
                                                 ReservationDate reservationDate, MenuCategory menuCategory) {
         if (!dateCondition.test(reservationDate)) {

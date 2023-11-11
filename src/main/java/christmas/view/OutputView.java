@@ -30,4 +30,9 @@ public class OutputView {
         System.out.println("\n<총 혜택 금액>");
         System.out.println(totalBenefit + "원");
     }
+
+    public void showFinalPrice(Integer finalPrice) {
+        System.out.println("\n<할인 후 예상 결제 금액>");
+        System.out.println(finalPrice + "원");
+    }
 }

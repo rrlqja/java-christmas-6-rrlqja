@@ -43,5 +43,8 @@ public class GameController {
 
         Integer totalBenefit = orderService.getTotalBenefit(order, reservationDate);
         outputView.showTotalBenefit(totalBenefit);
+
+        Integer finalPrice = orderService.getFinalPrice(order, reservationDate);
+        outputView.showFinalPrice(finalPrice);
     }
 }
