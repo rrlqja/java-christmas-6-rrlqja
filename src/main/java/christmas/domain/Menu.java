@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.exception.MenuNotFoundException;
+
 public enum Menu {
     MUSHROOM_SOUP("양송이수프", 6000, MenuCategory.APPETIZER),
     TAPAS("타파스", 5500, MenuCategory.APPETIZER),
@@ -27,6 +29,15 @@ public enum Menu {
         this.menuCategory = menuCategory;
     }
 
+    public static Menu valueOfMenuName(String menuName) {
+        for (Menu menu : Menu.values()) {
+            if (menu.getMenuName().equals(menuName)) {
+                return menu;
+            }
+        }
+        throw new MenuNotFoundException();
+    }
+
     public String getMenuName() {
         return menuName;
     }
@@ -37,5 +48,13 @@ public enum Menu {
 
     public MenuCategory getMenuCategory() {
         return menuCategory;
+    }
+
+    public boolean isMainCategory(MenuCategory menuCategory) {
+        return this.getMenuCategory() == menuCategory;
+    }
+
+    public boolean isDessert(MenuCategory menuCategory) {
+        return this.getMenuCategory() == menuCategory;
     }
 }
