@@ -31,4 +31,8 @@ public class ReservationDate {
     public boolean isWeekday() {
         return !isWeekend();
     }
+
+    public boolean isBeforeChristmas() {
+        return reservationDate <= 25;
+    }
 }

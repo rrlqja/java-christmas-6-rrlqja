@@ -1,9 +1,11 @@
 package christmas.service;
 
-import christmas.domain.*;
-import christmas.dto.OrderMenuDto;
+import christmas.domain.Menu;
+import christmas.domain.MenuQuantity;
+import christmas.domain.Order;
+import christmas.domain.ReservationDate;
+import christmas.domain.OrderResult;
 
-import java.util.List;
 import java.util.Map;
 
 public class OrderService {
@@ -12,23 +14,7 @@ public class OrderService {
         return new Order(orders);
     }
 
-    public List<OrderMenuDto> getOrderMenu(Order order) {
-        return order.getOrderMenus();
-    }
-
-    public Integer getTotalPrice(Order order) {
-        return order.getTotalPrice();
-    }
-
-    public List<DiscountBenefit> getBenefits(Order order, ReservationDate reservationDate) {
-        return order.getDiscountBenefits(reservationDate);
-    }
-
-    public Integer getTotalBenefit(Order order, ReservationDate reservationDate) {
-        return order.getTotalDiscountMoney(reservationDate);
-    }
-
-    public Integer getFinalPrice(Order order, ReservationDate reservationDate) {
-        return order.getFinalPrice(reservationDate);
+    public OrderResult getOrderResult(Order order, ReservationDate reservationDate) {
+        return order.getOrderResult(reservationDate);
     }
 }

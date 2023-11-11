@@ -1,5 +1,8 @@
 package christmas.dto;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class OrderMenuDto {
     private final String menuName;
     private final Integer menuQuantity;
@@ -8,12 +11,13 @@ public class OrderMenuDto {
         this.menuName = menuName;
         this.menuQuantity = menuQuantity;
     }
-
-    public String getMenuName() {
-        return menuName;
-    }
-
-    public Integer getMenuQuantity() {
-        return menuQuantity;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        return sb.append(menuName)
+                .append(" ")
+                .append(menuQuantity)
+                .append("개")
+                .toString();
     }
 }

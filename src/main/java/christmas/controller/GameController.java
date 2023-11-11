@@ -1,13 +1,12 @@
 package christmas.controller;
 
 import christmas.domain.*;
-import christmas.dto.OrderMenuDto;
+import christmas.domain.OrderResult;
 import christmas.handler.InputHandler;
 import christmas.service.OrderService;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.util.List;
 import java.util.Map;
 
 public class GameController {
@@ -32,19 +31,15 @@ public class GameController {
         Map<Menu, MenuQuantity> orders = inputHandler.toOrders(ordersInput);
 
         Order order = orderService.createOrder(orders);
-        List<OrderMenuDto> orderMenu = orderService.getOrderMenu(order);
-        outputView.showOrderMenus(orderMenu);
 
-        Integer totalPrice = orderService.getTotalPrice(order);
-        outputView.showTotalPrice(totalPrice);
+        OrderResult orderResult = orderService.getOrderResult(order, reservationDate);
 
-        List<DiscountBenefit> benefits = orderService.getBenefits(order, reservationDate);
-        outputView.showBenefits(benefits);
-
-        Integer totalBenefit = orderService.getTotalBenefit(order, reservationDate);
-        outputView.showTotalBenefit(totalBenefit);
-
-        Integer finalPrice = orderService.getFinalPrice(order, reservationDate);
-        outputView.showFinalPrice(finalPrice);
+        outputView.showOrderMenus(orderResult.getOrderMenus());
+        outputView.showTotalPrice(orderResult.getTotalPrice());
+        outputView.showGiftMenu(orderResult.getGiftMenu());
+        outputView.showBenefits(orderResult.getDiscountBenefits());
+        outputView.showTotalBenefit(orderResult.getTotalBenefit());
+        outputView.showFinalPrice(orderResult.getFinalPrice());
+        outputView.showBadge(orderResult.getBadge());
     }
 }

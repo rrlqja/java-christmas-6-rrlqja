@@ -16,6 +16,12 @@ public class Order {
         this.orders = new HashMap<>(orders);
     }
 
+    public OrderResult getOrderResult(ReservationDate reservationDate) {
+        return OrderResult.of(getOrderMenus(), getTotalPrice(), getGiftDiscountMoney(),
+                getDiscountBenefits(reservationDate), getTotalDiscountMoney(reservationDate),
+                getFinalPrice(reservationDate));
+    }
+
     public List<OrderMenuDto> getOrderMenus() {
         return orders.entrySet()
                 .stream()
@@ -30,7 +36,7 @@ public class Order {
                 .sum();
     }
 
-    public List<DiscountBenefit> getDiscountBenefits(ReservationDate reservationDate) {
+    private List<DiscountBenefit> getDiscountBenefits(ReservationDate reservationDate) {
         List<DiscountBenefit> discountBenefits = new ArrayList<>();
 
         addBenefit(discountBenefits, "크리스마스 디데이 할인", () -> getDateDiscountMoney(reservationDate));
@@ -42,7 +48,10 @@ public class Order {
         return discountBenefits;
     }
 
-    public Integer getDateDiscountMoney(ReservationDate reservationDate) {
+    private Integer getDateDiscountMoney(ReservationDate reservationDate) {
+        if (!reservationDate.isBeforeChristmas()) {
+            return 0;
+        }
         int dateDiscountMoney = 1000;
         for (int i = 1; i < reservationDate.getReservationDate(); i++) {
             dateDiscountMoney += 100;
@@ -50,21 +59,21 @@ public class Order {
         return dateDiscountMoney;
     }
 
-    public Integer getWeekdayDiscountMoney(ReservationDate reservationDate) {
+    private Integer getWeekdayDiscountMoney(ReservationDate reservationDate) {
         Integer weekdayDiscountMoney = calculatorWeekDiscountMoney(
                 ReservationDate::isWeekday, reservationDate, MenuCategory.DESSERT);
 
         return weekdayDiscountMoney;
     }
 
-    public Integer getWeekendDiscountMoney(ReservationDate reservationDate) {
+    private Integer getWeekendDiscountMoney(ReservationDate reservationDate) {
         Integer weekendDiscountMoney = calculatorWeekDiscountMoney(
                 ReservationDate::isWeekend, reservationDate, MenuCategory.MAIN);
 
         return weekendDiscountMoney;
     }
 
-    public Integer getStarDayDiscount(ReservationDate reservationDate) {
+    private Integer getStarDayDiscount(ReservationDate reservationDate) {
         if (!reservationDate.isStarDay()) {
             return 0;
         }
@@ -72,7 +81,7 @@ public class Order {
         return 1000;
     }
 
-    public Integer getGiftDiscountMoney() {
+    private Integer getGiftDiscountMoney() {
         Integer totalPrice = getTotalPrice();
         if (totalPrice >= 120000) {
             return 25000;
@@ -81,11 +90,11 @@ public class Order {
         return 0;
     }
 
-    public Menu getGiftMenu() {
+    private Menu getGiftMenu() {
         return Menu.CHAMPAGNE;
     }
 
-    public Integer getTotalDiscountMoney(ReservationDate reservationDate) {
+    private Integer getTotalDiscountMoney(ReservationDate reservationDate) {
         Integer totalDiscountMoney = 0;
 
         totalDiscountMoney += calculateTotalPriceMoney(reservationDate);
@@ -93,7 +102,7 @@ public class Order {
         return totalDiscountMoney;
     }
 
-    public Integer getFinalPrice(ReservationDate reservationDate) {
+    private Integer getFinalPrice(ReservationDate reservationDate) {
         return getTotalPrice() - getTotalDiscountMoney(reservationDate);
     }
 
