@@ -1,7 +1,6 @@
 package christmas.domain;
 
 import christmas.dto.OrderMenuDto;
-import christmas.utils.WeekPredicate;
 
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +39,11 @@ public class Order {
     }
 
     public Integer getWeekDiscountMoney(MenuCategory menuCategory) {
-        return calculatorWeekDiscountMoney(menuCategory);
+        return orders.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey().getMenuCategory().equals(menuCategory))
+                .mapToInt(entry -> entry.getValue().getMenuQuantity() * 2023)
+                .sum();
     }
 
     public Integer getStarDayDiscount(ReservationDate reservationDate) {
@@ -58,13 +61,5 @@ public class Order {
         }
 
         return 25000;
-    }
-
-    private Integer calculatorWeekDiscountMoney(MenuCategory menuCategory) {
-        return orders.entrySet()
-                .stream()
-                .filter(entry -> entry.getKey().getMenuCategory().equals(menuCategory))
-                .mapToInt(entry -> entry.getValue().getMenuQuantity() * 2023)
-                .sum();
     }
 }
