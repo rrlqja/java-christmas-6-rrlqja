@@ -43,7 +43,6 @@ public class OrderService {
     }
 
     private DiscountStrategies getDiscountStrategies(ReservationDate reservationDate) {
-        List<DiscountStrategy> strategies = DiscountStrategyFactory.createStrategies(reservationDate);
-        return new DiscountStrategies(strategies);
+        return DiscountStrategyFactory.createStrategies(reservationDate);
     }
 }

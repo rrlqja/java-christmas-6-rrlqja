@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscountStrategyFactory {
-    public static List<DiscountStrategy> createStrategies(ReservationDate reservationDate) {
+    public static DiscountStrategies createStrategies(ReservationDate reservationDate) {
         List<DiscountStrategy> strategies = new ArrayList<>();
         strategies.add(new ChristmasDiscountStrategy(reservationDate));
         strategies.add(new WeekDiscountStrategy(reservationDate));
         strategies.add(new StarDayDiscountStrategy(reservationDate));
         strategies.add(new GiftDiscountStrategy());
-        return strategies;
+
+        return new DiscountStrategies(strategies);
     }
 }
