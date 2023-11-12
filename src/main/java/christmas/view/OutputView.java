@@ -1,7 +1,6 @@
 package christmas.view;
 
 import christmas.domain.Badge;
-import christmas.domain.DiscountBenefit;
 import christmas.domain.GiftMenu;
 import christmas.dto.OrderMenuDto;
 
@@ -28,13 +27,10 @@ public class OutputView {
         System.out.println(giftMenu.toString());
     }
 
-    public void showBenefits(List<DiscountBenefit> benefits) {
+    public void showBenefits(List<String> benefits) {
         System.out.println("\n<혜택 내역>");
-        if (benefits.isEmpty()) {
-            System.out.println("없음");
-        }
-        for (DiscountBenefit benefit : benefits) {
-            System.out.println(benefit.toString());
+        for (String benefit : benefits) {
+            System.out.println(benefit);
         }
     }
 

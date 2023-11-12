@@ -1,6 +1,14 @@
 package christmas.service;
 
-import christmas.domain.*;
+import christmas.domain.Menu;
+import christmas.domain.MenuQuantity;
+import christmas.domain.Order;
+import christmas.domain.OrderResult;
+import christmas.domain.ReservationDate;
+import christmas.domain.discount.DiscountStrategies;
+import christmas.domain.discount.DiscountStrategyFactory;
+import christmas.domain.discount.discountbenefit.DiscountBenefit;
+import christmas.domain.discount.discountstrategy.DiscountStrategy;
 import christmas.dto.OrderMenuDto;
 
 import java.util.List;
@@ -14,13 +22,12 @@ public class OrderService {
 
     public OrderResult getOrderResult(Order order, ReservationDate reservationDate) {
         OrderResult orderResult = createOrderResult(order, reservationDate);
+
         return orderResult;
     }
 
     private OrderResult createOrderResult(Order order, ReservationDate reservationDate) {
-        return OrderResult.of(getOrderMenus(order), getTotalPrice(order), getGiftDiscountMoney(order),
-                getDiscountBenefits(order, reservationDate), getTotalBenefit(order, reservationDate),
-                getFinalPrice(order, reservationDate));
+        return OrderResult.of(getOrderMenus(order), getTotalPrice(order), getDiscountBenefits(order, reservationDate));
     }
 
     private List<OrderMenuDto> getOrderMenus(Order order) {
@@ -31,19 +38,12 @@ public class OrderService {
         return order.getTotalPrice();
     }
 
-    private Integer getGiftDiscountMoney(Order order) {
-        return order.getGiftDiscountMoney();
+    public List<DiscountBenefit> getDiscountBenefits(Order order, ReservationDate reservationDate) {
+        return getDiscountStrategies(reservationDate).getDiscountBenefits(order);
     }
 
-    private List<DiscountBenefit> getDiscountBenefits(Order order, ReservationDate reservationDate) {
-        return order.getDiscountBenefits(reservationDate);
-    }
-
-    private Integer getTotalBenefit(Order order, ReservationDate reservationDate) {
-        return order.getTotalDiscountMoney(reservationDate);
-    }
-
-    private Integer getFinalPrice(Order order, ReservationDate reservationDate) {
-        return order.getFinalPrice(reservationDate);
+    private DiscountStrategies getDiscountStrategies(ReservationDate reservationDate) {
+        List<DiscountStrategy> strategies = DiscountStrategyFactory.createStrategies(reservationDate);
+        return new DiscountStrategies(strategies);
     }
 }
