@@ -1,8 +1,7 @@
-package christmas.domain.discount.discountstrategy;
+package christmas.domain.discount.strategy;
 
 import christmas.domain.Order;
 import christmas.domain.ReservationDate;
-import christmas.domain.discount.discountbenefit.ChristmasDiscountBenefit;
 import christmas.domain.discount.discountbenefit.DiscountBenefit;
 import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
 import christmas.domain.discount.discountbenefit.StarDayDiscountBenefit;

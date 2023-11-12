@@ -1,4 +1,4 @@
-package christmas.domain.discount.discountstrategy;
+package christmas.domain.discount.strategy;
 
 import christmas.domain.MenuCategory;
 import christmas.domain.Order;

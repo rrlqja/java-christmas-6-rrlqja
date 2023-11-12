@@ -1,7 +1,8 @@
-package christmas.domain;
+package christmas.domain.orderresult;
 
+import christmas.domain.Badge;
+import christmas.domain.GiftMenu;
 import christmas.domain.discount.discountbenefit.DiscountBenefit;
-import christmas.domain.discount.discountbenefit.GiftDiscountBenefit;
 import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
 import christmas.dto.OrderMenuDto;
 

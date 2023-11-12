@@ -1,4 +1,4 @@
-package christmas.domain.discount.discountstrategy;
+package christmas.domain.discount.strategy;
 
 import christmas.domain.Order;
 import christmas.domain.ReservationDate;

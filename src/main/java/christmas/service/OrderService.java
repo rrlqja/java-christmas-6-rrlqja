@@ -3,12 +3,12 @@ package christmas.service;
 import christmas.domain.Menu;
 import christmas.domain.MenuQuantity;
 import christmas.domain.Order;
-import christmas.domain.OrderResult;
+import christmas.domain.orderresult.OrderResult;
 import christmas.domain.ReservationDate;
 import christmas.domain.discount.DiscountStrategies;
 import christmas.domain.discount.DiscountStrategyFactory;
 import christmas.domain.discount.discountbenefit.DiscountBenefit;
-import christmas.domain.discount.discountstrategy.DiscountStrategy;
+import christmas.domain.discount.strategy.DiscountStrategy;
 import christmas.dto.OrderMenuDto;
 
 import java.util.List;
