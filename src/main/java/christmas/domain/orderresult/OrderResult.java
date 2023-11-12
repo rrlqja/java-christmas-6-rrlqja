@@ -3,6 +3,7 @@ package christmas.domain.orderresult;
 import christmas.domain.Badge;
 import christmas.domain.GiftMenu;
 import christmas.domain.discount.discountbenefit.DiscountBenefit;
+import christmas.domain.discount.discountbenefit.GiftDiscountBenefit;
 import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
 import christmas.dto.OrderMenuDto;
 
@@ -34,7 +35,7 @@ public class OrderResult {
         GiftMenu giftMenu = getGiftMenu(totalPrice);
         List<String> benefits = getBenefits(discountBenefits);
         Integer totalBenefit = getTotalBenefit(discountBenefits);
-        Integer finalPrice = getFinalPrice(totalPrice, totalBenefit);
+        Integer finalPrice = getFinalPrice(totalPrice, discountBenefits);
         Badge badge = Badge.valueOfBenefit(totalBenefit);
 
         return new OrderResult(orderMenus, totalPrice, giftMenu, benefits, totalBenefit, finalPrice, badge);
@@ -92,14 +93,20 @@ public class OrderResult {
     }
 
     private static Integer getTotalBenefit(List<DiscountBenefit> discountBenefits) {
-        Integer totalBenefit = 0;
-        for (DiscountBenefit discountBenefit : discountBenefits) {
-            totalBenefit += discountBenefit.getDiscountAmount();
-        }
-        return totalBenefit;
+        return discountBenefits.stream()
+                .mapToInt(DiscountBenefit::getDiscountAmount)
+                .sum();
     }
 
-    private static int getFinalPrice(Integer totalPrice, Integer totalBenefit) {
-        return totalPrice - totalBenefit;
+    private static int getFinalPrice(Integer totalPrice, List<DiscountBenefit> discountBenefits) {
+        int benefitWithoutGiftMenu = getBenefitWithoutGiftMenu(discountBenefits);
+        return totalPrice - benefitWithoutGiftMenu;
+    }
+
+    private static int getBenefitWithoutGiftMenu(List<DiscountBenefit> discountBenefits) {
+        return discountBenefits.stream()
+                .filter(discountBenefit -> !(discountBenefit instanceof GiftDiscountBenefit))
+                .mapToInt(DiscountBenefit::getDiscountAmount)
+                .sum();
     }
 }
