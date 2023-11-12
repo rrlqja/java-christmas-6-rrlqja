@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.dto.OrderMenuDto;
+import christmas.utils.DatePredicate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,10 +91,10 @@ public class Order {
         return getTotalPrice() - getTotalDiscountMoney(reservationDate);
     }
 
-    private Integer calculatorWeekDiscountMoney(Predicate<ReservationDate> dateCondition,
+    private Integer calculatorWeekDiscountMoney(DatePredicate<ReservationDate> dateCondition,
                                                 ReservationDate reservationDate, MenuCategory menuCategory) {
         Integer discountMoney = 0;
-        if (!dateCondition.test(reservationDate)) {
+        if (!dateCondition.match(reservationDate)) {
             return discountMoney;
         }
 
