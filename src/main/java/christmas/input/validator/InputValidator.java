@@ -8,7 +8,7 @@ import christmas.exception.InvalidInputException;
 import java.util.Map;
 
 public class InputValidator {
-    private static final String PATTERN = "^[가-힣]+-\\d+(,\\s*[가-힣]+-\\d+)*$";
+    private static final String PATTERN = "^[가-힣]+-\\d+(,[가-힣]+-\\d+)*$";
     private static final int MAX_MENU_QUANTITY = 20;
 
     public void validateOrdersPattern(String ordersInput) {
