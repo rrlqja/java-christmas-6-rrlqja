@@ -1,21 +1,21 @@
-package christmas.domain.discount.discountbenefit;
+package christmas.domain.order.discount.discountbenefit;
 
 import christmas.utils.FormatUtil;
 
 import java.util.Objects;
 
-public class DDAyDiscountBenefit implements DiscountBenefit {
-    private static final String DISCOUNT_DESCRIPTION = "크리스마스 디데이 할인";
+public class GiftDiscountBenefit implements DiscountBenefit {
+    private static final String DISCOUNT_DESCRIPTION = "증정 이벤트";
+    private static final int DISCOUNT_AMOUNT = 25000;
     private static final String DISCOUNT_PREFIX = ": -";
     private static final String CURRENCY_SUFFIX = "원";
     private final String description;
     private final Integer discountAmount;
 
-    public DDAyDiscountBenefit(Integer discountAmount) {
+    public GiftDiscountBenefit() {
         this.description = DISCOUNT_DESCRIPTION;
-        this.discountAmount = discountAmount;
+        this.discountAmount = DISCOUNT_AMOUNT;
     }
-
     @Override
     public String getBenefit() {
         StringBuilder sb = new StringBuilder();
@@ -45,11 +45,10 @@ public class DDAyDiscountBenefit implements DiscountBenefit {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof DDAyDiscountBenefit)) {
+        if (!(obj instanceof GiftDiscountBenefit)) {
             return false;
         }
-
-        DDAyDiscountBenefit other = (DDAyDiscountBenefit) obj;
+        GiftDiscountBenefit other = (GiftDiscountBenefit) obj;
         return Objects.equals(description, other.description);
     }
 }

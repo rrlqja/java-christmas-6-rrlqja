@@ -44,7 +44,7 @@ public class Order {
             return NO_DISCOUNT_BENEFIT;
         }
         int DDayDiscountAmount = DEFAULT_D_DAY_DISCOUNT_AMOUNT;
-        for (int i = FIRST_DAY; i < reservationDate.getReservationDate(); i++) {
+        for (int startDay = FIRST_DAY; startDay < reservationDate.getReservationDate(); startDay++) {
             DDayDiscountAmount += DISCOUNT_INCREMENT;
         }
         return DDayDiscountAmount;

@@ -1,8 +1,8 @@
-package christmas.domain.discount;
+package christmas.domain.order.discount;
 
 import christmas.domain.order.Order;
-import christmas.domain.discount.discountbenefit.DiscountBenefit;
-import christmas.domain.discount.strategy.DiscountStrategy;
+import christmas.domain.order.discount.discountbenefit.DiscountBenefit;
+import christmas.domain.order.discount.strategy.DiscountStrategy;
 
 import java.util.List;
 

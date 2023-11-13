@@ -4,9 +4,9 @@ import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuQuantity;
 import christmas.domain.orderresult.OrderResult;
 import christmas.domain.ReservationDate;
-import christmas.domain.discount.DiscountStrategies;
-import christmas.domain.discount.DiscountStrategyFactory;
-import christmas.domain.discount.discountbenefit.DiscountBenefit;
+import christmas.domain.order.discount.DiscountStrategies;
+import christmas.domain.order.discount.DiscountStrategyFactory;
+import christmas.domain.order.discount.discountbenefit.DiscountBenefit;
 import christmas.domain.order.dto.OrderMenuDto;
 
 import java.util.List;

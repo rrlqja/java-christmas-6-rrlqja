@@ -1,4 +1,4 @@
-package christmas.domain.discount.discountbenefit;
+package christmas.domain.order.discount.discountbenefit;
 
 public interface DiscountBenefit {
 

@@ -1,11 +1,11 @@
-package christmas.domain.discount.strategy;
+package christmas.domain.order.discount.strategy;
 
 import christmas.domain.menu.MenuCategory;
 import christmas.domain.order.Order;
 import christmas.domain.ReservationDate;
-import christmas.domain.discount.discountbenefit.DiscountBenefit;
-import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
-import christmas.domain.discount.discountbenefit.WeekDiscountBenefit;
+import christmas.domain.order.discount.discountbenefit.DiscountBenefit;
+import christmas.domain.order.discount.discountbenefit.NoDiscountBenefit;
+import christmas.domain.order.discount.discountbenefit.WeekDiscountBenefit;
 
 public class WeekDiscountStrategy implements DiscountStrategy {
     private static final String WEEKEND_DISCOUNT = "주말 할인";

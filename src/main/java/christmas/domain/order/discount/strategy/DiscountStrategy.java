@@ -1,7 +1,7 @@
-package christmas.domain.discount.strategy;
+package christmas.domain.order.discount.strategy;
 
 import christmas.domain.order.Order;
-import christmas.domain.discount.discountbenefit.DiscountBenefit;
+import christmas.domain.order.discount.discountbenefit.DiscountBenefit;
 
 public interface DiscountStrategy {
     DiscountBenefit calculateDiscount(Order order);

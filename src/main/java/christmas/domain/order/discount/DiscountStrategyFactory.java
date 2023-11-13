@@ -1,11 +1,11 @@
-package christmas.domain.discount;
+package christmas.domain.order.discount;
 
 import christmas.domain.ReservationDate;
-import christmas.domain.discount.strategy.ChristmasDiscountStrategy;
-import christmas.domain.discount.strategy.DiscountStrategy;
-import christmas.domain.discount.strategy.WeekDiscountStrategy;
-import christmas.domain.discount.strategy.StarDayDiscountStrategy;
-import christmas.domain.discount.strategy.GiftDiscountStrategy;
+import christmas.domain.order.discount.strategy.ChristmasDiscountStrategy;
+import christmas.domain.order.discount.strategy.DiscountStrategy;
+import christmas.domain.order.discount.strategy.WeekDiscountStrategy;
+import christmas.domain.order.discount.strategy.StarDayDiscountStrategy;
+import christmas.domain.order.discount.strategy.GiftDiscountStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

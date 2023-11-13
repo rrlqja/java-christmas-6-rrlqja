@@ -1,9 +1,9 @@
 package christmas.domain.orderresult;
 
 import christmas.domain.menu.GiftMenu;
-import christmas.domain.discount.discountbenefit.DiscountBenefit;
-import christmas.domain.discount.discountbenefit.GiftDiscountBenefit;
-import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
+import christmas.domain.order.discount.discountbenefit.DiscountBenefit;
+import christmas.domain.order.discount.discountbenefit.GiftDiscountBenefit;
+import christmas.domain.order.discount.discountbenefit.NoDiscountBenefit;
 import christmas.domain.order.dto.OrderMenuDto;
 
 import java.util.List;
