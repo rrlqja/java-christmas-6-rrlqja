@@ -51,4 +51,12 @@ class InputConvertorTest {
         assertThatThrownBy(() -> inputConvertor.convertToOrders(ordersInput))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("음료만 주문시 주문 실패 테스트")
+    @ValueSource(strings = {"제로콜라-10", "제로콜라-1,레드와인-1"})
+    @ParameterizedTest
+    void onlyDrinkOrder(String ordersInput) {
+        assertThatThrownBy(() -> inputConvertor.convertToOrders(ordersInput))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
