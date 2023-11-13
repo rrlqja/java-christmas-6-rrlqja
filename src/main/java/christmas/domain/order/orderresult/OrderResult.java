@@ -9,7 +9,6 @@ import christmas.domain.order.dto.OrderMenuDto;
 import java.util.List;
 
 public class OrderResult {
-    private static final String NOTHING = "없음";
     private static final int MINIMUM_FOR_GIFT = 120000;
     private final List<OrderMenuDto> orderMenus;
     private final Integer totalPrice;
@@ -73,7 +72,9 @@ public class OrderResult {
 
     private static List<String> getBenefits(List<DiscountBenefit> discountBenefits) {
         if (ifOnlyNoBenefit(discountBenefits)) {
-            return List.of(NOTHING);
+            return discountBenefits.stream()
+                    .map(DiscountBenefit::getBenefit)
+                    .toList();
         }
         return discountBenefits.stream()
                 .filter(discountBenefit -> !(discountBenefit instanceof NoDiscountBenefit))
