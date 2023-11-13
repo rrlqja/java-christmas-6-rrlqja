@@ -17,8 +17,7 @@ public class GameController {
     private final OutputHandler outputHandler;
     private final OrderService orderService;
 
-    public GameController(InputHandler inputHandler, OutputHandler outputHandler,
-                          OrderService orderService) {
+    public GameController(InputHandler inputHandler, OutputHandler outputHandler, OrderService orderService) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
         this.orderService = orderService;
