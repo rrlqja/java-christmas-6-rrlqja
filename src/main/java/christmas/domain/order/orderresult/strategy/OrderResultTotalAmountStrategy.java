@@ -4,7 +4,7 @@ import christmas.domain.order.orderresult.OrderResult;
 
 import static christmas.utils.FormatUtil.formatNumber;
 
-public class OrderResultTotalPriceStrategy implements OrderResultStrategy {
+public class OrderResultTotalAmountStrategy implements OrderResultStrategy {
     private static final String TITLE = "<할인 전 총주문 금액>";
     private static final String LINE_BREAK = System.lineSeparator();
     private static final String CURRENCY_SUFFIX = "원";
@@ -14,7 +14,7 @@ public class OrderResultTotalPriceStrategy implements OrderResultStrategy {
         StringBuilder sb = new StringBuilder();
         sb.append(TITLE)
                 .append(LINE_BREAK)
-                .append(formatNumber(orderResult.getTotalPrice()))
+                .append(formatNumber(orderResult.getTotalAmount()))
                 .append(CURRENCY_SUFFIX)
                 .append(LINE_BREAK);
 

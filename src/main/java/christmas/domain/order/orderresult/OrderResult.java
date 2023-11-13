@@ -11,34 +11,34 @@ import java.util.List;
 public class OrderResult {
     private static final int MINIMUM_FOR_GIFT = 120000;
     private final List<OrderMenuDto> orderMenus;
-    private final Integer totalPrice;
+    private final Integer totalAmount;
     private final GiftMenu giftMenu;
     private final List<String> discountBenefits;
     private final Integer totalBenefit;
-    private final Integer finalPrice;
+    private final Integer finalAmount;
     private final Badge badge;
 
-    private OrderResult(List<OrderMenuDto> orderMenus, Integer totalPrice, GiftMenu giftMenu,
-                        List<String> discountBenefits, Integer totalBenefit, Integer finalPrice,
+    private OrderResult(List<OrderMenuDto> orderMenus, Integer totalAmount, GiftMenu giftMenu,
+                        List<String> discountBenefits, Integer totalBenefit, Integer finalAmount,
                         Badge badge) {
         this.orderMenus = orderMenus;
-        this.totalPrice = totalPrice;
+        this.totalAmount = totalAmount;
         this.giftMenu = giftMenu;
         this.discountBenefits = discountBenefits;
         this.totalBenefit = totalBenefit;
-        this.finalPrice = finalPrice;
+        this.finalAmount = finalAmount;
         this.badge = badge;
     }
 
-    public static OrderResult of(List<OrderMenuDto> orderMenus, Integer totalPrice,
+    public static OrderResult of(List<OrderMenuDto> orderMenus, Integer totalAmount,
                                  List<DiscountBenefit> discountBenefits) {
-        GiftMenu giftMenu = getGiftMenu(totalPrice);
+        GiftMenu giftMenu = getGiftMenu(totalAmount);
         List<String> benefits = getBenefits(discountBenefits);
         Integer totalBenefit = getTotalBenefit(discountBenefits);
-        Integer finalPrice = getFinalPrice(totalPrice, discountBenefits);
+        Integer finalAmount = getFinalAmount(totalAmount, discountBenefits);
         Badge badge = Badge.valueOfBenefit(totalBenefit);
 
-        return new OrderResult(orderMenus, totalPrice, giftMenu, benefits, totalBenefit, finalPrice, badge);
+        return new OrderResult(orderMenus, totalAmount, giftMenu, benefits, totalBenefit, finalAmount, badge);
     }
 
 
@@ -46,8 +46,8 @@ public class OrderResult {
         return orderMenus;
     }
 
-    public Integer getTotalPrice() {
-        return totalPrice;
+    public Integer getTotalAmount() {
+        return totalAmount;
     }
 
     public GiftMenu getGiftMenu() {
@@ -62,8 +62,8 @@ public class OrderResult {
         return totalBenefit;
     }
 
-    public Integer getFinalPrice() {
-        return finalPrice;
+    public Integer getFinalAmount() {
+        return finalAmount;
     }
 
     public Badge getBadge() {
@@ -100,7 +100,7 @@ public class OrderResult {
                 .sum();
     }
 
-    private static int getFinalPrice(Integer totalPrice, List<DiscountBenefit> discountBenefits) {
+    private static int getFinalAmount(Integer totalPrice, List<DiscountBenefit> discountBenefits) {
         int benefitWithoutGiftMenu = getBenefitWithoutGiftMenu(discountBenefits);
         return totalPrice - benefitWithoutGiftMenu;
     }

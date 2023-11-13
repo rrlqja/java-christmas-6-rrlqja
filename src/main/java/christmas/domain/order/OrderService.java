@@ -25,14 +25,14 @@ public class OrderService {
     }
 
     private OrderResult createOrderResult(Order order, ReservationDate reservationDate) {
-        return OrderResult.of(getOrderMenus(order), getTotalPrice(order), getDiscountBenefits(order, reservationDate));
+        return OrderResult.of(getOrderMenus(order), getTotalAmount(order), getDiscountBenefits(order, reservationDate));
     }
 
     private List<OrderMenuDto> getOrderMenus(Order order) {
         return order.getOrderMenus();
     }
 
-    private Integer getTotalPrice(Order order) {
+    private Integer getTotalAmount(Order order) {
         return order.getTotalAmount();
     }
 
