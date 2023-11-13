@@ -6,20 +6,16 @@ import christmas.handler.InputHandler;
 import christmas.handler.OutputHandler;
 import christmas.service.OrderService;
 import christmas.utils.InputSupplier;
-import christmas.view.InputView;
-import christmas.view.OutputView;
 
 import java.util.Map;
 
 public class GameController {
-    private final InputView inputView;
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
     private final OrderService orderService;
 
-    public GameController(InputView inputView, InputHandler inputHandler, OutputHandler outputHandler,
+    public GameController(InputHandler inputHandler, OutputHandler outputHandler,
                           OrderService orderService) {
-        this.inputView = inputView;
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
         this.orderService = orderService;
@@ -36,16 +32,14 @@ public class GameController {
     }
 
     private ReservationDate getReservationDate() {
-        String reservationDateInput = inputView.getReservationDateInput();
-        return inputHandler.toReservationDate(reservationDateInput);
+        return inputHandler.getReservationDate();
     }
 
     private Map<Menu, MenuQuantity> getOrders() {
-        String ordersInput = inputView.getOrdersInput();
-        return inputHandler.toOrders(ordersInput);
+        return inputHandler.getOrders();
     }
 
-    public <T> T getInput(InputSupplier<T> inputSupplier) {
+    private  <T> T getInput(InputSupplier<T> inputSupplier) {
         while (true) {
             try {
                 return inputSupplier.get();

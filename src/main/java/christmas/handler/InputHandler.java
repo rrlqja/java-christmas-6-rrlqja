@@ -1,95 +1,49 @@
 package christmas.handler;
 
 import christmas.domain.Menu;
-import christmas.domain.MenuCategory;
 import christmas.domain.MenuQuantity;
 import christmas.domain.ReservationDate;
-import christmas.exception.*;
+import christmas.utils.InputConvertor;
 import christmas.validator.InputValidator;
+import christmas.view.InputView;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class InputHandler {
-
+    private final InputView inputView;
     private final InputValidator inputValidator;
+    private final InputConvertor inputConvertor;
 
-    public InputHandler(InputValidator inputValidator) {
+    public InputHandler(InputView inputView, InputValidator inputValidator, InputConvertor inputConvertor) {
+        this.inputView = inputView;
         this.inputValidator = inputValidator;
+        this.inputConvertor = inputConvertor;
     }
 
-    public ReservationDate toReservationDate(String reservationInput) {
-        inputValidator.validateBlank(reservationInput);
+    public ReservationDate getReservationDate() {
+        String reservationDateInput = getReservationDateInput();
 
-        Integer reservationDate = parseToInt(reservationInput);
+        inputValidator.validateBlank(reservationDateInput);
 
-        return new ReservationDate(reservationDate);
+        return inputConvertor.convertToReservationDate(reservationDateInput);
     }
 
-    public Map<Menu, MenuQuantity> toOrders(String ordersInput) {
+    public Map<Menu, MenuQuantity> getOrders() {
+        String ordersInput = getOrdersInput();
+
         inputValidator.validatePattern(ordersInput);
 
-        String[] items = ordersInput.split(",");
-        Map<Menu, MenuQuantity> orders = getOrders(items);
+        Map<Menu, MenuQuantity> orders = inputConvertor.convertToOrders(ordersInput);
 
-        validateTotalQuantity(orders);
-        validateDrinkOnlyOrder(orders);
-
+        inputValidator.validateOrders(orders);
         return orders;
     }
 
-    private Integer parseToInt(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new ParseException();
-        }
+    private String getReservationDateInput() {
+        return inputView.getReservationDateInput();
     }
 
-    private Map<Menu, MenuQuantity> getOrders(String[] items) {
-        Map<Menu, MenuQuantity> orders = new HashMap<>();
-        for (String item : items) {
-            inputValidator.validateBlank(item);
-            putOrder(orders, item);
-        }
-        return orders;
-    }
-
-    private void putOrder(Map<Menu, MenuQuantity> orders, String item) {
-        String[] order = item.split("-");
-        String orderMenuName = order[0].trim();
-        String orderMenuQuantity = order[1].trim();
-
-        Menu menu = Menu.valueOfMenuName(orderMenuName);
-        MenuQuantity menuQuantity = new MenuQuantity(parseToInt(orderMenuQuantity));
-
-        validateDuplicateMenu(orders, menu);
-
-        orders.put(menu, menuQuantity);
-    }
-
-    private void validateTotalQuantity(Map<Menu, MenuQuantity> orderMap) {
-        int totalQuantity = orderMap.values()
-                .stream()
-                .mapToInt(MenuQuantity::getMenuQuantity)
-                .sum();
-        if (totalQuantity > 20) {
-            throw new InvalidOrderException();
-        }
-    }
-
-    private void validateDrinkOnlyOrder(Map<Menu, MenuQuantity> orderMap) {
-        boolean onlyDrinks = orderMap.keySet()
-                .stream()
-                .allMatch(menu -> menu.getMenuCategory() == MenuCategory.DRINK);
-        if (onlyDrinks) {
-            throw new InvalidOrderException();
-        }
-    }
-
-    private void validateDuplicateMenu(Map<Menu, MenuQuantity> orders, Menu menu) {
-        if (orders.containsKey(menu)) {
-            throw new InvalidOrderException();
-        }
+    private String getOrdersInput() {
+        return inputView.getOrdersInput();
     }
 }
