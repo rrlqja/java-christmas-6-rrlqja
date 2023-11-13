@@ -5,7 +5,7 @@ import christmas.domain.order.orderresult.OrderResult;
 
 public class OrderResultGiftMenuStrategy implements OrderResultStrategy {
     private static final String TITLE = "<증정 메뉴>";
-    private static final String LINE_BREAK = "\n";
+    private static final String LINE_BREAK = System.lineSeparator();
     @Override
     public String output(OrderResult orderResult) {
         StringBuilder sb = new StringBuilder();

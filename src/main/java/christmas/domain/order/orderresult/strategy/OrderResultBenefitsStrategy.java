@@ -6,13 +6,13 @@ import java.util.List;
 
 public class OrderResultBenefitsStrategy implements OrderResultStrategy {
     private static final String TITLE = "<혜택 내역>";
-    private static final String LINE_BREAK = "\n";
+    private static final String LINE_BREAK = System.lineSeparator();
     @Override
     public String output(OrderResult orderResult) {
         StringBuilder sb = new StringBuilder();
         List<String> benefits = orderResult.getDiscountBenefits();
 
-        sb.append(TITLE)
+        sb.append(LINE_BREAK).append(TITLE)
                 .append(LINE_BREAK);
         for (String benefit : benefits) {
             sb.append(benefit)

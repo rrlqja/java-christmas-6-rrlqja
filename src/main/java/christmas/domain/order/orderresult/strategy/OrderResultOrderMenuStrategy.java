@@ -7,7 +7,7 @@ import java.util.List;
 
 public class OrderResultOrderMenuStrategy implements OrderResultStrategy {
     private static final String TITLE = "<주문 메뉴>";
-    private static final String LINE_BREAK = "\n";
+    private static final String LINE_BREAK = System.lineSeparator();
     @Override
     public String output(OrderResult orderResult) {
         StringBuilder sb = new StringBuilder();

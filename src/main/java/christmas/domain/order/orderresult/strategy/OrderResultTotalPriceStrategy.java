@@ -6,7 +6,7 @@ import static christmas.utils.FormatUtil.formatNumber;
 
 public class OrderResultTotalPriceStrategy implements OrderResultStrategy {
     private static final String TITLE = "<할인 전 총주문 금액>";
-    private static final String LINE_BREAK = "\n";
+    private static final String LINE_BREAK = System.lineSeparator();
     private static final String CURRENCY_SUFFIX = "원";
 
     @Override
