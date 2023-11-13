@@ -14,7 +14,7 @@ public class Application {
         // TODO: 프로그램 구현
         GameController gameController = new GameController(
                 new InputHandler(
-                        new InputView(), new InputValidator(), new InputConvertor()),
+                        new InputView(), new InputConvertor(new InputValidator())),
                 new OutputHandler(
                         new OutputView()), new OrderService());
 

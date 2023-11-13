@@ -5,11 +5,17 @@ import christmas.domain.MenuQuantity;
 import christmas.domain.ReservationDate;
 import christmas.exception.InvalidOrderException;
 import christmas.exception.ParseException;
+import christmas.validator.InputValidator;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class InputConvertor {
+    private final InputValidator inputValidator;
+
+    public InputConvertor(InputValidator inputValidator) {
+        this.inputValidator = inputValidator;
+    }
 
     public ReservationDate convertToReservationDate(String reservationDateInput) {
         Integer reservationDate = parseInput(reservationDateInput);
@@ -18,9 +24,12 @@ public class InputConvertor {
     }
 
     public Map<Menu, MenuQuantity> convertToOrders(String ordersInput) {
-        String[] items = getSplitInput(ordersInput, ",");
+        inputValidator.validateOrdersPattern(ordersInput);
 
-         return getOrders(items);
+        Map<Menu, MenuQuantity> orders = getOrders(getSplitInput(ordersInput, ","));
+
+        inputValidator.validateOrders(orders);
+        return orders;
     }
 
     private Integer parseInput(String input) {

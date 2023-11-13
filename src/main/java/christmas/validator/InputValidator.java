@@ -19,7 +19,7 @@ public class InputValidator {
         }
     }
 
-    public void validatePattern(String ordersInput) {
+    public void validateOrdersPattern(String ordersInput) {
         if (!ordersInput.matches(PATTERN)) {
             throw new InvalidInputPatternException();
         }
