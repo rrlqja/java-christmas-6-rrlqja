@@ -3,7 +3,6 @@ package christmas.validator;
 import christmas.domain.Menu;
 import christmas.domain.MenuCategory;
 import christmas.domain.MenuQuantity;
-import christmas.exception.BlankInputException;
 import christmas.exception.InvalidInputPatternException;
 import christmas.exception.InvalidOrderException;
 
@@ -11,13 +10,6 @@ import java.util.Map;
 
 public class InputValidator {
     private static final String PATTERN = "^[가-힣]+-\\d+(,\\s*[가-힣]+-\\d+)*$";
-
-
-    public void validateBlank(String input) {
-        if (input.isBlank()) {
-            throw new BlankInputException();
-        }
-    }
 
     public void validateOrdersPattern(String ordersInput) {
         if (!ordersInput.matches(PATTERN)) {
