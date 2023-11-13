@@ -36,7 +36,7 @@ public class OrderService {
         return order.getTotalAmount();
     }
 
-    public List<DiscountBenefit> getDiscountBenefits(Order order, ReservationDate reservationDate) {
+    private List<DiscountBenefit> getDiscountBenefits(Order order, ReservationDate reservationDate) {
         return getDiscountStrategies(reservationDate).getDiscountBenefits(order);
     }
 
