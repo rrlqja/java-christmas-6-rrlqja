@@ -1,7 +1,7 @@
 package christmas.handler;
 
 import christmas.domain.orderresult.OrderResult;
-import christmas.domain.orderresult.OrderResultOutputFactory;
+import christmas.domain.orderresult.OrderResultStrategiesFactory;
 import christmas.view.OutputView;
 
 public class OutputHandler {
@@ -12,7 +12,7 @@ public class OutputHandler {
     }
 
     public void showOrderResult(OrderResult orderResult) {
-        OrderResultOutputFactory.createStrategies()
+        OrderResultStrategiesFactory.createStrategies()
                 .getOutputs(orderResult)
                 .forEach(outputView::showOutput);
     }

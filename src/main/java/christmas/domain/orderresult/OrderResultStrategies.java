@@ -1,13 +1,13 @@
 package christmas.domain.orderresult;
 
-import christmas.domain.orderresult.strategy.OrderResultOutputStrategy;
+import christmas.domain.orderresult.strategy.OrderResultStrategy;
 
 import java.util.List;
 
-public class OutputStrategies {
-    private final List<OrderResultOutputStrategy> strategies;
+public class OrderResultStrategies {
+    private final List<OrderResultStrategy> strategies;
 
-    public OutputStrategies(List<OrderResultOutputStrategy> strategies) {
+    public OrderResultStrategies(List<OrderResultStrategy> strategies) {
         this.strategies = strategies;
     }
 

@@ -10,6 +10,8 @@ import christmas.dto.OrderMenuDto;
 import java.util.List;
 
 public class OrderResult {
+    private static final String NOTHING = "없음";
+    private static final int MINIMUM_FOR_GIFT = 120000;
     private final List<OrderMenuDto> orderMenus;
     private final Integer totalPrice;
     private final GiftMenu giftMenu;
@@ -72,7 +74,7 @@ public class OrderResult {
 
     private static List<String> getBenefits(List<DiscountBenefit> discountBenefits) {
         if (ifOnlyNoBenefit(discountBenefits)) {
-            return List.of("없음");
+            return List.of(NOTHING);
         }
         return discountBenefits.stream()
                 .filter(discountBenefit -> !(discountBenefit instanceof NoDiscountBenefit))
@@ -82,7 +84,7 @@ public class OrderResult {
 
     private static GiftMenu getGiftMenu(Integer totalPrice) {
         GiftMenu giftMenu = GiftMenu.NONE;
-        if (totalPrice >= 120000) {
+        if (totalPrice >= MINIMUM_FOR_GIFT) {
             giftMenu = GiftMenu.CHAMPAGNE;
         }
         return giftMenu;

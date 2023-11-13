@@ -5,17 +5,19 @@ import christmas.dto.OrderMenuDto;
 
 import java.util.List;
 
-public class OrderResultOutputOrderMenuStrategy implements OrderResultOutputStrategy {
+public class OrderResultOrderMenuStrategy implements OrderResultStrategy {
+    private static final String TITLE = "<주문 메뉴>";
+    private static final String LINE_BREAK = "\n";
     @Override
     public String output(OrderResult orderResult) {
         StringBuilder sb = new StringBuilder();
         List<OrderMenuDto> orderMenus = orderResult.getOrderMenus();
 
-        sb.append("<주문 메뉴>")
-                .append("\n");
+        sb.append(TITLE)
+                .append(LINE_BREAK);
         for (OrderMenuDto orderMenu : orderMenus) {
             sb.append(orderMenu.toString())
-                    .append("\n");
+                    .append(LINE_BREAK);
         }
 
         return sb.toString();

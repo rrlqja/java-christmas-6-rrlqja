@@ -4,17 +4,19 @@ import christmas.domain.orderresult.OrderResult;
 
 import java.util.List;
 
-public class OrderResultOutputBenefitsStrategy implements OrderResultOutputStrategy {
+public class OrderResultBenefitsStrategy implements OrderResultStrategy {
+    private static final String TITLE = "<혜택 내역>";
+    private static final String LINE_BREAK = "\n";
     @Override
     public String output(OrderResult orderResult) {
         StringBuilder sb = new StringBuilder();
         List<String> benefits = orderResult.getDiscountBenefits();
 
-        sb.append("<혜택 내역>")
-                .append("\n");
+        sb.append(TITLE)
+                .append(LINE_BREAK);
         for (String benefit : benefits) {
             sb.append(benefit)
-                    .append("\n");
+                    .append(LINE_BREAK);
         }
 
         return sb.toString();
