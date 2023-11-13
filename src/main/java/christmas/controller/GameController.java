@@ -1,8 +1,9 @@
 package christmas.controller;
 
 import christmas.domain.*;
-import christmas.domain.OrderResult;
+import christmas.domain.orderresult.OrderResult;
 import christmas.handler.InputHandler;
+import christmas.handler.OutputHandler;
 import christmas.service.OrderService;
 import christmas.utils.InputSupplier;
 import christmas.view.InputView;
@@ -13,33 +14,25 @@ import java.util.Map;
 public class GameController {
     private final InputView inputView;
     private final InputHandler inputHandler;
+    private final OutputHandler outputHandler;
     private final OrderService orderService;
-    private final OutputView outputView;
 
-    public GameController(InputView inputView, InputHandler inputHandler,
-                          OrderService orderService, OutputView outputView) {
+    public GameController(InputView inputView, InputHandler inputHandler, OutputHandler outputHandler,
+                          OrderService orderService) {
         this.inputView = inputView;
         this.inputHandler = inputHandler;
+        this.outputHandler = outputHandler;
         this.orderService = orderService;
-        this.outputView = outputView;
     }
 
     public void startGame() {
         ReservationDate reservationDate = getInput(this::getReservationDate);
-
         Map<Menu, MenuQuantity> orders = getInput(this::getOrders);
-
         Order order = orderService.createOrder(orders);
 
         OrderResult orderResult = orderService.getOrderResult(order, reservationDate);
 
-        outputView.showOrderMenus(orderResult.getOrderMenus());
-        outputView.showTotalPrice(orderResult.getTotalPrice());
-        outputView.showGiftMenu(orderResult.getGiftMenu());
-        outputView.showBenefits(orderResult.getDiscountBenefits());
-        outputView.showTotalBenefit(orderResult.getTotalBenefit());
-        outputView.showFinalPrice(orderResult.getFinalPrice());
-        outputView.showBadge(orderResult.getBadge());
+        outputHandler.showOrderResult(orderResult);
     }
 
     private ReservationDate getReservationDate() {

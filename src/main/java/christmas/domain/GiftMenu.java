@@ -13,7 +13,7 @@ public enum GiftMenu {
     @Override
     public String toString() {
         if (CHAMPAGNE.equals(this)) {
-            return menuName + "1개";
+            return menuName + " 1개";
         }
         return menuName;
     }
