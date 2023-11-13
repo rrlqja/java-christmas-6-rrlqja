@@ -1,6 +1,7 @@
 package christmas.utils;
 
-import christmas.validator.InputValidator;
+import christmas.input.convertor.InputConvertor;
+import christmas.input.validator.InputValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

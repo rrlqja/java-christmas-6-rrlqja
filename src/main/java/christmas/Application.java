@@ -1,13 +1,13 @@
 package christmas;
 
 import christmas.controller.GameController;
-import christmas.handler.InputHandler;
-import christmas.handler.OutputHandler;
-import christmas.service.OrderService;
-import christmas.utils.InputConvertor;
-import christmas.validator.InputValidator;
-import christmas.view.InputView;
-import christmas.view.OutputView;
+import christmas.input.handler.InputHandler;
+import christmas.output.handler.OutputHandler;
+import christmas.domain.order.OrderService;
+import christmas.input.convertor.InputConvertor;
+import christmas.input.validator.InputValidator;
+import christmas.input.view.InputView;
+import christmas.output.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {

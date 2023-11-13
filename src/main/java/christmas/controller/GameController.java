@@ -1,13 +1,13 @@
 package christmas.controller;
 
-import christmas.domain.Menu;
-import christmas.domain.MenuQuantity;
-import christmas.domain.Order;
+import christmas.domain.menu.Menu;
+import christmas.domain.menu.MenuQuantity;
+import christmas.domain.order.Order;
 import christmas.domain.ReservationDate;
-import christmas.domain.orderresult.OrderResult;
-import christmas.handler.InputHandler;
-import christmas.handler.OutputHandler;
-import christmas.service.OrderService;
+import christmas.domain.order.orderresult.OrderResult;
+import christmas.input.handler.InputHandler;
+import christmas.output.handler.OutputHandler;
+import christmas.domain.order.OrderService;
 import christmas.utils.InputSupplier;
 
 import java.util.Map;

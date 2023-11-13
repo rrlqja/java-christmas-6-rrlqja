@@ -1,6 +1,6 @@
 package christmas.domain.discount;
 
-import christmas.domain.Order;
+import christmas.domain.order.Order;
 import christmas.domain.discount.discountbenefit.DiscountBenefit;
 import christmas.domain.discount.strategy.DiscountStrategy;
 

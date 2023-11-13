@@ -1,7 +1,9 @@
 package christmas.domain;
 
-import christmas.dto.OrderMenuDto;
-import org.assertj.core.api.Assertions;
+import christmas.domain.menu.Menu;
+import christmas.domain.menu.MenuQuantity;
+import christmas.domain.order.Order;
+import christmas.domain.order.dto.OrderMenuDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

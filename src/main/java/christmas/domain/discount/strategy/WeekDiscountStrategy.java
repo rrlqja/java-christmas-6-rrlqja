@@ -1,7 +1,7 @@
 package christmas.domain.discount.strategy;
 
-import christmas.domain.MenuCategory;
-import christmas.domain.Order;
+import christmas.domain.menu.MenuCategory;
+import christmas.domain.order.Order;
 import christmas.domain.ReservationDate;
 import christmas.domain.discount.discountbenefit.DiscountBenefit;
 import christmas.domain.discount.discountbenefit.NoDiscountBenefit;

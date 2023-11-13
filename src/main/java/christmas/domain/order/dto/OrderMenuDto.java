@@ -1,0 +1,20 @@
+package christmas.domain.order.dto;
+
+public class OrderMenuDto {
+    private final String menuName;
+    private final Integer menuQuantity;
+
+    public OrderMenuDto(String menuName, Integer menuQuantity) {
+        this.menuName = menuName;
+        this.menuQuantity = menuQuantity;
+    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        return sb.append(menuName)
+                .append(" ")
+                .append(menuQuantity)
+                .append("개")
+                .toString();
+    }
+}
