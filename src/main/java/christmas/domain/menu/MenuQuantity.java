@@ -3,6 +3,7 @@ package christmas.domain.menu;
 import christmas.exception.InvalidMenuQuantityException;
 
 public class MenuQuantity {
+    public static final int MINIMUM_MENU_QUANTITY = 1;
     private final Integer menuQuantity;
 
     public MenuQuantity(Integer menuQuantity) {
@@ -11,7 +12,7 @@ public class MenuQuantity {
     }
 
     private void validateMenuQuantity(Integer menuQuantity) {
-        if (menuQuantity < 1) {
+        if (menuQuantity < MINIMUM_MENU_QUANTITY) {
             throw new InvalidMenuQuantityException();
         }
     }

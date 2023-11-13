@@ -16,7 +16,7 @@ public class StarDayDiscountStrategy implements DiscountStrategy {
 
     @Override
     public DiscountBenefit calculateDiscount(Order order) {
-        Integer starDayDiscount = order.getStarDayDiscount(reservationDate);
+        Integer starDayDiscount = order.getStarDayDiscountAmount(reservationDate);
 
         return createDiscountBenefit(starDayDiscount);
     }

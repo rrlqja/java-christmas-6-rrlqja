@@ -9,7 +9,7 @@ public class GiftDiscountStrategy implements DiscountStrategy {
     private static final int DEFAULT_DISCOUNT_AMOUNT = 0;
     @Override
     public DiscountBenefit calculateDiscount(Order order) {
-        Integer giftDiscountMoney = order.getGiftDiscountMoney();
+        Integer giftDiscountMoney = order.getGiftDiscountAmount();
 
         return createDiscountBenefit(giftDiscountMoney);
     }

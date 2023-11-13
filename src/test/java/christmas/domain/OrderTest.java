@@ -38,7 +38,7 @@ class OrderTest {
     void getTotalPriceTest() {
         Order order = getDefaultOrder();
 
-        Integer actualTotalPrice = order.getTotalPrice();
+        Integer actualTotalPrice = order.getTotalAmount();
 
         Integer expectTotalPrice = 0;
         for (Menu menu : orders.keySet()) {

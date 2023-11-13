@@ -16,5 +16,4 @@ public class OutputHandler {
                 .getOutputs(orderResult)
                 .forEach(outputView::showOutput);
     }
-
 }

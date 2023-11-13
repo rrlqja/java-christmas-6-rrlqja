@@ -3,14 +3,18 @@ package christmas.input.convertor;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuQuantity;
 import christmas.domain.ReservationDate;
-import christmas.exception.InvalidOrderException;
-import christmas.exception.ParseException;
+import christmas.exception.InvalidDateException;
+import christmas.exception.InvalidInputException;
 import christmas.input.validator.InputValidator;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class InputConvertor {
+    private static final String COMMA = ",";
+    private static final String HYPHEN = "-";
+    private static final int MENU_NAME_INDEX = 0;
+    private static final int MENU_QUANTITY_INDEX = 1;
     private final InputValidator inputValidator;
 
     public InputConvertor(InputValidator inputValidator) {
@@ -26,7 +30,7 @@ public class InputConvertor {
     public Map<Menu, MenuQuantity> convertToOrders(String ordersInput) {
         inputValidator.validateOrdersPattern(ordersInput);
 
-        Map<Menu, MenuQuantity> orders = getOrders(getSplitInput(ordersInput, ","));
+        Map<Menu, MenuQuantity> orders = getOrders(splitInput(ordersInput, COMMA));
 
         inputValidator.validateOrders(orders);
         return orders;
@@ -36,12 +40,8 @@ public class InputConvertor {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new ParseException();
+            throw new InvalidDateException();
         }
-    }
-
-    private String[] getSplitInput(String input, String delimiter) {
-        return splitInput(input, delimiter);
     }
 
     private Map<Menu, MenuQuantity> getOrders(String[] items) {
@@ -53,9 +53,9 @@ public class InputConvertor {
     }
 
     private void putOrder(Map<Menu, MenuQuantity> orders, String item) {
-        String[] order = splitInput(item, "-");
-        String orderMenuName = order[0].trim();
-        Integer orderMenuQuantity = parseInput(order[1].trim());
+        String[] order = splitInput(item, HYPHEN);
+        String orderMenuName = order[MENU_NAME_INDEX].trim();
+        Integer orderMenuQuantity = parseInput(order[MENU_QUANTITY_INDEX].trim());
 
         Menu menu = Menu.valueOfMenuName(orderMenuName);
         MenuQuantity menuQuantity = new MenuQuantity(orderMenuQuantity);
@@ -67,7 +67,7 @@ public class InputConvertor {
 
     private void validateDuplicateMenu(Map<Menu, MenuQuantity> orders, Menu menu) {
         if (orders.containsKey(menu)) {
-            throw new InvalidOrderException();
+            throw new InvalidInputException();
         }
     }
 

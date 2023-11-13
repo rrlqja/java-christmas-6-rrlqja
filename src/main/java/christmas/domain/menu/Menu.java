@@ -49,12 +49,4 @@ public enum Menu {
     public MenuCategory getMenuCategory() {
         return menuCategory;
     }
-
-    public boolean isMainCategory(MenuCategory menuCategory) {
-        return this.getMenuCategory() == menuCategory;
-    }
-
-    public boolean isDessert(MenuCategory menuCategory) {
-        return this.getMenuCategory() == menuCategory;
-    }
 }

@@ -2,7 +2,7 @@ package christmas.domain.discount.strategy;
 
 import christmas.domain.order.Order;
 import christmas.domain.ReservationDate;
-import christmas.domain.discount.discountbenefit.ChristmasDiscountBenefit;
+import christmas.domain.discount.discountbenefit.DDAyDiscountBenefit;
 import christmas.domain.discount.discountbenefit.DiscountBenefit;
 import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
 
@@ -16,7 +16,7 @@ public class ChristmasDiscountStrategy implements DiscountStrategy {
 
     @Override
     public DiscountBenefit calculateDiscount(Order order) {
-        Integer dateDiscountMoney = order.getDateDiscountMoney(reservationDate);
+        Integer dateDiscountMoney = order.getDDayDiscountAmount(reservationDate);
 
         return createDiscountBenefit(dateDiscountMoney);
     }
@@ -25,6 +25,6 @@ public class ChristmasDiscountStrategy implements DiscountStrategy {
         if (dateDiscountMoney == DEFAULT_DISCOUNT_AMOUNT) {
             return new NoDiscountBenefit();
         }
-        return new ChristmasDiscountBenefit(dateDiscountMoney);
+        return new DDAyDiscountBenefit(dateDiscountMoney);
     }
 }

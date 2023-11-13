@@ -8,8 +8,8 @@ import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
 import christmas.domain.discount.discountbenefit.WeekDiscountBenefit;
 
 public class WeekDiscountStrategy implements DiscountStrategy {
-    public static final String WEEKEND_DISCOUNT = "주말 할인";
-    public static final String WEEKDAY_DISCOUNT = "평일 할인";
+    private static final String WEEKEND_DISCOUNT = "주말 할인";
+    private static final String WEEKDAY_DISCOUNT = "평일 할인";
     private static final int DEFAULT_DISCOUNT_AMOUNT = 0;
     private final ReservationDate reservationDate;
 
@@ -27,7 +27,7 @@ public class WeekDiscountStrategy implements DiscountStrategy {
     }
 
     private DiscountBenefit createDiscountBenefit(Order order, MenuCategory menuCategory, String description) {
-        Integer weekDiscountMoney = order.getWeekDiscountMoney(menuCategory);
+        Integer weekDiscountMoney = order.getWeekDiscountAmount(menuCategory);
 
         return getDiscountBenefit(weekDiscountMoney, description);
     }

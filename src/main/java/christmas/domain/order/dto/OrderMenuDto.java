@@ -1,6 +1,8 @@
 package christmas.domain.order.dto;
 
 public class OrderMenuDto {
+    private static final String SPACE = " ";
+    private static final String UNIT_SUFFIX = "개";
     private final String menuName;
     private final Integer menuQuantity;
 
@@ -12,9 +14,9 @@ public class OrderMenuDto {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         return sb.append(menuName)
-                .append(" ")
+                .append(SPACE)
                 .append(menuQuantity)
-                .append("개")
+                .append(UNIT_SUFFIX)
                 .toString();
     }
 }

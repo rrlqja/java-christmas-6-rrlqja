@@ -3,17 +3,17 @@ package christmas.input.validator;
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuCategory;
 import christmas.domain.menu.MenuQuantity;
-import christmas.exception.InvalidInputPatternException;
-import christmas.exception.InvalidOrderException;
+import christmas.exception.InvalidInputException;
 
 import java.util.Map;
 
 public class InputValidator {
     private static final String PATTERN = "^[가-힣]+-\\d+(,\\s*[가-힣]+-\\d+)*$";
+    private static final int MAX_MENU_QUANTITY = 20;
 
     public void validateOrdersPattern(String ordersInput) {
         if (!ordersInput.matches(PATTERN)) {
-            throw new InvalidInputPatternException();
+            throw new InvalidInputException();
         }
     }
 
@@ -23,21 +23,28 @@ public class InputValidator {
     }
 
     private void validateTotalQuantity(Map<Menu, MenuQuantity> orderMap) {
-        int totalQuantity = orderMap.values()
-                .stream()
-                .mapToInt(MenuQuantity::getMenuQuantity)
-                .sum();
-        if (totalQuantity > 20) {
-            throw new InvalidOrderException();
+        int totalQuantity = getTotalQuantity(orderMap);
+        if (totalQuantity > MAX_MENU_QUANTITY) {
+            throw new InvalidInputException();
         }
     }
 
+    private int getTotalQuantity(Map<Menu, MenuQuantity> orderMap) {
+        return orderMap.values()
+                .stream()
+                .mapToInt(MenuQuantity::getMenuQuantity)
+                .sum();
+    }
+
     private void validateDrinkOnlyOrder(Map<Menu, MenuQuantity> orderMap) {
-        boolean onlyDrinks = orderMap.keySet()
+        if (isOnlyDrinks(orderMap)) {
+            throw new InvalidInputException();
+        }
+    }
+
+    private boolean isOnlyDrinks(Map<Menu, MenuQuantity> orderMap) {
+        return orderMap.keySet()
                 .stream()
                 .allMatch(menu -> menu.getMenuCategory() == MenuCategory.DRINK);
-        if (onlyDrinks) {
-            throw new InvalidOrderException();
-        }
     }
 }

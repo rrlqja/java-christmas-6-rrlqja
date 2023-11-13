@@ -3,9 +3,12 @@ package christmas.domain.order.orderresult;
 public enum Badge {
     SANTA("산타"),
     TREE("트리"),
-    START("별"),
+    STAR("별"),
     NONE("없음");
 
+    private static final int SANTA_THRESHOLD = 20000;
+    private static final int TREE_THRESHOLD = 10000;
+    private static final int STAR_THRESHOLD = 5000;
     private final String badge;
 
     Badge(String badge) {
@@ -13,14 +16,14 @@ public enum Badge {
     }
 
     public static Badge valueOfBenefit(Integer totalBenefit) {
-        if (totalBenefit > 20000) {
+        if (totalBenefit > SANTA_THRESHOLD) {
             return SANTA;
         }
-        if (totalBenefit > 10000) {
+        if (totalBenefit > TREE_THRESHOLD) {
             return TREE;
         }
-        if (totalBenefit > 5000) {
-            return START;
+        if (totalBenefit > STAR_THRESHOLD) {
+            return STAR;
         }
         return NONE;
     }

@@ -2,7 +2,6 @@ package christmas.domain.order;
 
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuQuantity;
-import christmas.domain.order.Order;
 import christmas.domain.order.orderresult.OrderResult;
 import christmas.domain.ReservationDate;
 import christmas.domain.discount.DiscountStrategies;
@@ -34,7 +33,7 @@ public class OrderService {
     }
 
     private Integer getTotalPrice(Order order) {
-        return order.getTotalPrice();
+        return order.getTotalAmount();
     }
 
     public List<DiscountBenefit> getDiscountBenefits(Order order, ReservationDate reservationDate) {

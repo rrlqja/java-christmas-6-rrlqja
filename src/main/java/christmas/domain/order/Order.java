@@ -11,6 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Order {
+    private static final int NO_DISCOUNT_BENEFIT = 0;
+    private static final int DEFAULT_D_DAY_DISCOUNT_AMOUNT = 1000;
+    private static final int DISCOUNT_INCREMENT = 100;
+    private static final int FIRST_DAY = 1;
+    private static final int WEEK_DISCOUNT_AMOUNT = 2023;
+    private static final int STAR_DAY_DISCOUNT_AMOUNT = 1000;
+    private static final int GIFT_DISCOUNT_AMOUNT = 25000;
+    private static final int MINIMUM_FOR_GIFT = 120000;
     private final Map<Menu, MenuQuantity> orders;
 
     public Order(Map<Menu, MenuQuantity> orders) {
@@ -24,46 +32,46 @@ public class Order {
                 .toList();
     }
 
-    public Integer getTotalPrice() {
+    public Integer getTotalAmount() {
         return orders.entrySet()
                 .stream()
                 .mapToInt(entry -> entry.getKey().getMenuPrice() * entry.getValue().getMenuQuantity())
                 .sum();
     }
 
-    public Integer getDateDiscountMoney(ReservationDate reservationDate) {
+    public Integer getDDayDiscountAmount(ReservationDate reservationDate) {
         if (!reservationDate.isBeforeChristmas()) {
-            return 0;
+            return NO_DISCOUNT_BENEFIT;
         }
-        int dateDiscountMoney = 1000;
-        for (int i = 1; i < reservationDate.getReservationDate(); i++) {
-            dateDiscountMoney += 100;
+        int DDayDiscountAmount = DEFAULT_D_DAY_DISCOUNT_AMOUNT;
+        for (int i = FIRST_DAY; i < reservationDate.getReservationDate(); i++) {
+            DDayDiscountAmount += DISCOUNT_INCREMENT;
         }
-        return dateDiscountMoney;
+        return DDayDiscountAmount;
     }
 
-    public Integer getWeekDiscountMoney(MenuCategory menuCategory) {
+    public Integer getWeekDiscountAmount(MenuCategory menuCategory) {
         return orders.entrySet()
                 .stream()
                 .filter(entry -> entry.getKey().getMenuCategory().equals(menuCategory))
-                .mapToInt(entry -> entry.getValue().getMenuQuantity() * 2023)
+                .mapToInt(entry -> entry.getValue().getMenuQuantity() * WEEK_DISCOUNT_AMOUNT)
                 .sum();
     }
 
-    public Integer getStarDayDiscount(ReservationDate reservationDate) {
+    public Integer getStarDayDiscountAmount(ReservationDate reservationDate) {
         if (!reservationDate.isStarDay()) {
-            return 0;
+            return NO_DISCOUNT_BENEFIT;
         }
 
-        return 1000;
+        return STAR_DAY_DISCOUNT_AMOUNT;
     }
 
-    public Integer getGiftDiscountMoney() {
-        Integer totalPrice = getTotalPrice();
-        if (totalPrice < 120000) {
-            return 0;
+    public Integer getGiftDiscountAmount() {
+        Integer totalPrice = getTotalAmount();
+        if (totalPrice < MINIMUM_FOR_GIFT) {
+            return NO_DISCOUNT_BENEFIT;
         }
 
-        return 25000;
+        return GIFT_DISCOUNT_AMOUNT;
     }
 }

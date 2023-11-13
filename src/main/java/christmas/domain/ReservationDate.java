@@ -3,6 +3,12 @@ package christmas.domain;
 import christmas.exception.InvalidDateException;
 
 public class ReservationDate {
+    private static final int MINIMUM_DATE = 1;
+    private static final int MAXIMUM_DATE = 31;
+    private static final int DAY_IN_WEEK = 7;
+    private static final int WEEKEND_THRESHOLD = 2;
+    private static final int STAR_DAY = 3;
+    private static final int CHRISTMAS = 25;
     private final Integer reservationDate;
 
     public ReservationDate(Integer reservationDate) {
@@ -11,7 +17,7 @@ public class ReservationDate {
     }
 
     private void validate(Integer reservationDate) {
-        if (reservationDate < 1 || reservationDate > 31) {
+        if (reservationDate < MINIMUM_DATE || reservationDate > MAXIMUM_DATE) {
             throw new InvalidDateException();
         }
     }
@@ -21,18 +27,14 @@ public class ReservationDate {
     }
 
     public boolean isWeekend() {
-        return reservationDate % 7 <= 2;
+        return reservationDate % DAY_IN_WEEK <= WEEKEND_THRESHOLD;
     }
 
     public boolean isStarDay() {
-        return reservationDate % 7 == 3 || reservationDate == 25;
-    }
-
-    public boolean isWeekday() {
-        return !isWeekend();
+        return reservationDate % DAY_IN_WEEK == STAR_DAY || reservationDate == CHRISTMAS;
     }
 
     public boolean isBeforeChristmas() {
-        return reservationDate <= 25;
+        return reservationDate <= CHRISTMAS;
     }
 }

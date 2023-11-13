@@ -4,14 +4,14 @@ import christmas.utils.FormatUtil;
 
 import java.util.Objects;
 
-public class ChristmasDiscountBenefit implements DiscountBenefit {
+public class DDAyDiscountBenefit implements DiscountBenefit {
     private static final String DISCOUNT_DESCRIPTION = "크리스마스 디데이 할인";
     private static final String DISCOUNT_PREFIX = ": -";
     private static final String CURRENCY_SUFFIX = "원";
     private final String description;
     private final Integer discountAmount;
 
-    public ChristmasDiscountBenefit(Integer discountAmount) {
+    public DDAyDiscountBenefit(Integer discountAmount) {
         this.description = DISCOUNT_DESCRIPTION;
         this.discountAmount = discountAmount;
     }
@@ -45,11 +45,11 @@ public class ChristmasDiscountBenefit implements DiscountBenefit {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof ChristmasDiscountBenefit)) {
+        if (!(obj instanceof DDAyDiscountBenefit)) {
             return false;
         }
 
-        ChristmasDiscountBenefit other = (ChristmasDiscountBenefit) obj;
+        DDAyDiscountBenefit other = (DDAyDiscountBenefit) obj;
         return Objects.equals(description, other.description);
     }
 }
