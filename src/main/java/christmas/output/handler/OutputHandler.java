@@ -1,7 +1,7 @@
 package christmas.output.handler;
 
-import christmas.domain.order.orderresult.OrderResult;
-import christmas.domain.order.orderresult.OrderResultStrategiesFactory;
+import christmas.domain.orderresult.OrderResult;
+import christmas.domain.orderresult.OrderResultStrategiesFactory;
 import christmas.output.view.OutputView;
 
 public class OutputHandler {

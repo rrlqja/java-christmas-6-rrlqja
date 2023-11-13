@@ -1,4 +1,4 @@
-package christmas.domain.order.orderresult;
+package christmas.domain.orderresult;
 
 public enum Badge {
     SANTA("산타"),

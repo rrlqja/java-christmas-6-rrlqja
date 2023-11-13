@@ -4,7 +4,7 @@ import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuQuantity;
 import christmas.domain.order.Order;
 import christmas.domain.ReservationDate;
-import christmas.domain.order.orderresult.OrderResult;
+import christmas.domain.orderresult.OrderResult;
 import christmas.input.handler.InputHandler;
 import christmas.output.handler.OutputHandler;
 import christmas.domain.order.OrderService;

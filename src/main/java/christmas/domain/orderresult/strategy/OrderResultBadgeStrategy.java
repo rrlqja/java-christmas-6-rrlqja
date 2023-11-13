@@ -1,7 +1,7 @@
-package christmas.domain.order.orderresult.strategy;
+package christmas.domain.orderresult.strategy;
 
-import christmas.domain.order.orderresult.Badge;
-import christmas.domain.order.orderresult.OrderResult;
+import christmas.domain.orderresult.Badge;
+import christmas.domain.orderresult.OrderResult;
 
 public class OrderResultBadgeStrategy implements OrderResultStrategy {
     private static final String TITLE = "<12월 이벤트 배지>";

@@ -1,7 +1,7 @@
-package christmas.domain.order.orderresult.strategy;
+package christmas.domain.orderresult.strategy;
 
 import christmas.domain.menu.GiftMenu;
-import christmas.domain.order.orderresult.OrderResult;
+import christmas.domain.orderresult.OrderResult;
 
 public class OrderResultGiftMenuStrategy implements OrderResultStrategy {
     private static final String TITLE = "<증정 메뉴>";

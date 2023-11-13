@@ -2,7 +2,7 @@ package christmas.domain.order;
 
 import christmas.domain.menu.Menu;
 import christmas.domain.menu.MenuQuantity;
-import christmas.domain.order.orderresult.OrderResult;
+import christmas.domain.orderresult.OrderResult;
 import christmas.domain.ReservationDate;
 import christmas.domain.discount.DiscountStrategies;
 import christmas.domain.discount.DiscountStrategyFactory;

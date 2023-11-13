@@ -1,13 +1,13 @@
-package christmas.domain.order.orderresult;
+package christmas.domain.orderresult;
 
-import christmas.domain.order.orderresult.strategy.OrderResultGiftMenuStrategy;
-import christmas.domain.order.orderresult.strategy.OrderResultOrderMenuStrategy;
-import christmas.domain.order.orderresult.strategy.OrderResultStrategy;
-import christmas.domain.order.orderresult.strategy.OrderResultTotalAmountStrategy;
-import christmas.domain.order.orderresult.strategy.OrderResultBenefitsStrategy;
-import christmas.domain.order.orderresult.strategy.OrderResultTotalBenefitStrategy;
-import christmas.domain.order.orderresult.strategy.OrderResultFinalAmountStrategy;
-import christmas.domain.order.orderresult.strategy.OrderResultBadgeStrategy;
+import christmas.domain.orderresult.strategy.OrderResultGiftMenuStrategy;
+import christmas.domain.orderresult.strategy.OrderResultOrderMenuStrategy;
+import christmas.domain.orderresult.strategy.OrderResultStrategy;
+import christmas.domain.orderresult.strategy.OrderResultTotalAmountStrategy;
+import christmas.domain.orderresult.strategy.OrderResultBenefitsStrategy;
+import christmas.domain.orderresult.strategy.OrderResultTotalBenefitStrategy;
+import christmas.domain.orderresult.strategy.OrderResultFinalAmountStrategy;
+import christmas.domain.orderresult.strategy.OrderResultBadgeStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

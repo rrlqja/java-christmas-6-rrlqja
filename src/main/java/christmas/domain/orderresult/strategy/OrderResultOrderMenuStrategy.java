@@ -1,6 +1,6 @@
-package christmas.domain.order.orderresult.strategy;
+package christmas.domain.orderresult.strategy;
 
-import christmas.domain.order.orderresult.OrderResult;
+import christmas.domain.orderresult.OrderResult;
 import christmas.domain.order.dto.OrderMenuDto;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package christmas.domain.order.orderresult;
+package christmas.domain.orderresult;
 
 import christmas.domain.menu.GiftMenu;
 import christmas.domain.discount.discountbenefit.DiscountBenefit;
