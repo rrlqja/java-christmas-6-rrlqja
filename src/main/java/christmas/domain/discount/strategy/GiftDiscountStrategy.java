@@ -6,6 +6,7 @@ import christmas.domain.discount.discountbenefit.GiftDiscountBenefit;
 import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
 
 public class GiftDiscountStrategy implements DiscountStrategy {
+    private static final int DEFAULT_DISCOUNT_AMOUNT = 0;
     @Override
     public DiscountBenefit calculateDiscount(Order order) {
         Integer giftDiscountMoney = order.getGiftDiscountMoney();
@@ -14,7 +15,7 @@ public class GiftDiscountStrategy implements DiscountStrategy {
     }
 
     private DiscountBenefit createDiscountBenefit(Integer giftDiscountMoney) {
-        if (giftDiscountMoney == 0) {
+        if (giftDiscountMoney == DEFAULT_DISCOUNT_AMOUNT) {
             return new NoDiscountBenefit();
         }
         return new GiftDiscountBenefit();

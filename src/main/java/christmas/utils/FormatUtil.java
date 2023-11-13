@@ -1,6 +1,5 @@
 package christmas.utils;
 
-
 import java.text.NumberFormat;
 import java.util.Locale;
 

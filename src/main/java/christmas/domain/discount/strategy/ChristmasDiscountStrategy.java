@@ -7,6 +7,7 @@ import christmas.domain.discount.discountbenefit.DiscountBenefit;
 import christmas.domain.discount.discountbenefit.NoDiscountBenefit;
 
 public class ChristmasDiscountStrategy implements DiscountStrategy {
+    private static final int DEFAULT_DISCOUNT_AMOUNT = 0;
     private final ReservationDate reservationDate;
 
     public ChristmasDiscountStrategy(ReservationDate reservationDate) {
@@ -21,7 +22,7 @@ public class ChristmasDiscountStrategy implements DiscountStrategy {
     }
 
     private DiscountBenefit createDiscountBenefit(Integer dateDiscountMoney) {
-        if (dateDiscountMoney == 0) {
+        if (dateDiscountMoney == DEFAULT_DISCOUNT_AMOUNT) {
             return new NoDiscountBenefit();
         }
         return new ChristmasDiscountBenefit(dateDiscountMoney);

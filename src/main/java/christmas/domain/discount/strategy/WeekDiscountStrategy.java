@@ -10,6 +10,7 @@ import christmas.domain.discount.discountbenefit.WeekDiscountBenefit;
 public class WeekDiscountStrategy implements DiscountStrategy {
     public static final String WEEKEND_DISCOUNT = "주말 할인";
     public static final String WEEKDAY_DISCOUNT = "평일 할인";
+    private static final int DEFAULT_DISCOUNT_AMOUNT = 0;
     private final ReservationDate reservationDate;
 
 
@@ -32,7 +33,7 @@ public class WeekDiscountStrategy implements DiscountStrategy {
     }
 
     private DiscountBenefit getDiscountBenefit(Integer weekDiscountMoney, String description) {
-        if (weekDiscountMoney == 0) {
+        if (weekDiscountMoney == DEFAULT_DISCOUNT_AMOUNT) {
             return new NoDiscountBenefit();
         }
 

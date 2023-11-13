@@ -3,14 +3,14 @@ package christmas.domain.discount.discountbenefit;
 import java.util.Objects;
 
 public class NoDiscountBenefit implements DiscountBenefit {
-
-    public static final String NO_DISCOUNT = "없음";
+    private static final String NO_DISCOUNT = "없음";
+    private static final int DEFAULT_DISCOUNT_AMOUNT = 0;
     private final String description;
     private final Integer discountAmount;
 
     public NoDiscountBenefit() {
         this.description = NO_DISCOUNT;
-        this.discountAmount = 0;
+        this.discountAmount = DEFAULT_DISCOUNT_AMOUNT;
     }
 
     @Override
@@ -30,8 +30,12 @@ public class NoDiscountBenefit implements DiscountBenefit {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof NoDiscountBenefit)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof NoDiscountBenefit)) {
+            return false;
+        }
         NoDiscountBenefit other = (NoDiscountBenefit) obj;
         return Objects.equals(description, other.description);
     }

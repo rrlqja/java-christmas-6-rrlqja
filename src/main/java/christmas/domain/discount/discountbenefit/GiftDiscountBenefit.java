@@ -5,8 +5,10 @@ import christmas.utils.FormatUtil;
 import java.util.Objects;
 
 public class GiftDiscountBenefit implements DiscountBenefit {
-    public static final String DISCOUNT_DESCRIPTION = "증정 이벤트";
-    public static final int DISCOUNT_AMOUNT = 25000;
+    private static final String DISCOUNT_DESCRIPTION = "증정 이벤트";
+    private static final int DISCOUNT_AMOUNT = 25000;
+    private static final String DISCOUNT_PREFIX = ": -";
+    private static final String CURRENCY_SUFFIX = "원";
     private final String description;
     private final Integer discountAmount;
 
@@ -18,9 +20,9 @@ public class GiftDiscountBenefit implements DiscountBenefit {
     public String getBenefit() {
         StringBuilder sb = new StringBuilder();
         return sb.append(description)
-                .append(": -")
+                .append(DISCOUNT_PREFIX)
                 .append(getFormattedAmount())
-                .append("원")
+                .append(CURRENCY_SUFFIX)
                 .toString();
     }
 
@@ -40,8 +42,12 @@ public class GiftDiscountBenefit implements DiscountBenefit {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof GiftDiscountBenefit)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof GiftDiscountBenefit)) {
+            return false;
+        }
         GiftDiscountBenefit other = (GiftDiscountBenefit) obj;
         return Objects.equals(description, other.description);
     }
