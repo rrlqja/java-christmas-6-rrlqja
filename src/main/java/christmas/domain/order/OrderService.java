@@ -25,7 +25,7 @@ public class OrderService {
     }
 
     private OrderResult createOrderResult(Order order, ReservationDate reservationDate) {
-        return OrderResult.of(getOrderMenus(order), getTotalAmount(order), getDiscountBenefits(order, reservationDate));
+        return new OrderResult(getOrderMenus(order), getTotalAmount(order), getDiscountBenefits(order, reservationDate));
     }
 
     private List<OrderMenuDto> getOrderMenus(Order order) {

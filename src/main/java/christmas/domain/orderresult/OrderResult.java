@@ -12,35 +12,13 @@ public class OrderResult {
     private static final int MINIMUM_FOR_GIFT = 120000;
     private final List<OrderMenuDto> orderMenus;
     private final Integer totalAmount;
-    private final GiftMenu giftMenu;
-    private final List<String> discountBenefits;
-    private final Integer totalBenefit;
-    private final Integer finalAmount;
-    private final Badge badge;
+    private final List<DiscountBenefit> discountBenefits;
 
-    private OrderResult(List<OrderMenuDto> orderMenus, Integer totalAmount, GiftMenu giftMenu,
-                        List<String> discountBenefits, Integer totalBenefit, Integer finalAmount,
-                        Badge badge) {
+    public OrderResult(List<OrderMenuDto> orderMenus, Integer totalAmount, List<DiscountBenefit> discountBenefits) {
         this.orderMenus = orderMenus;
         this.totalAmount = totalAmount;
-        this.giftMenu = giftMenu;
         this.discountBenefits = discountBenefits;
-        this.totalBenefit = totalBenefit;
-        this.finalAmount = finalAmount;
-        this.badge = badge;
     }
-
-    public static OrderResult of(List<OrderMenuDto> orderMenus, Integer totalAmount,
-                                 List<DiscountBenefit> discountBenefits) {
-        GiftMenu giftMenu = getGiftMenu(totalAmount);
-        List<String> benefits = getBenefits(discountBenefits);
-        Integer totalBenefit = getTotalBenefit(discountBenefits);
-        Integer finalAmount = getFinalAmount(totalAmount, discountBenefits);
-        Badge badge = Badge.valueOfBenefit(totalBenefit);
-
-        return new OrderResult(orderMenus, totalAmount, giftMenu, benefits, totalBenefit, finalAmount, badge);
-    }
-
 
     public List<OrderMenuDto> getOrderMenus() {
         return orderMenus;
@@ -51,26 +29,34 @@ public class OrderResult {
     }
 
     public GiftMenu getGiftMenu() {
-        return giftMenu;
+        return getGiftMenu(totalAmount);
     }
 
     public List<String> getDiscountBenefits() {
-        return discountBenefits;
+        return getBenefits(discountBenefits);
     }
 
     public Integer getTotalBenefit() {
-        return totalBenefit;
+        return getTotalBenefit(discountBenefits);
     }
 
     public Integer getFinalAmount() {
-        return finalAmount;
+        return getFinalAmount(totalAmount, discountBenefits);
     }
 
     public Badge getBadge() {
-        return badge;
+        return Badge.valueOfBenefit(totalAmount);
     }
 
-    private static List<String> getBenefits(List<DiscountBenefit> discountBenefits) {
+    private GiftMenu getGiftMenu(Integer totalAmount) {
+        GiftMenu giftMenu = GiftMenu.NONE;
+        if (totalAmount >= MINIMUM_FOR_GIFT) {
+            giftMenu = GiftMenu.CHAMPAGNE;
+        }
+        return giftMenu;
+    }
+
+    private List<String> getBenefits(List<DiscountBenefit> discountBenefits) {
         if (ifOnlyNoBenefit(discountBenefits)) {
             return discountBenefits.stream()
                     .map(DiscountBenefit::getBenefit)
@@ -82,30 +68,22 @@ public class OrderResult {
                 .toList();
     }
 
-    private static GiftMenu getGiftMenu(Integer totalPrice) {
-        GiftMenu giftMenu = GiftMenu.NONE;
-        if (totalPrice >= MINIMUM_FOR_GIFT) {
-            giftMenu = GiftMenu.CHAMPAGNE;
-        }
-        return giftMenu;
-    }
-
-    private static boolean ifOnlyNoBenefit(List<DiscountBenefit> benefits) {
+    private boolean ifOnlyNoBenefit(List<DiscountBenefit> benefits) {
         return benefits.stream().allMatch(benefit -> benefit instanceof NoDiscountBenefit);
     }
 
-    private static Integer getTotalBenefit(List<DiscountBenefit> discountBenefits) {
+    private Integer getTotalBenefit(List<DiscountBenefit> discountBenefits) {
         return discountBenefits.stream()
                 .mapToInt(DiscountBenefit::getDiscountAmount)
                 .sum();
     }
 
-    private static int getFinalAmount(Integer totalPrice, List<DiscountBenefit> discountBenefits) {
+    private int getFinalAmount(Integer totalAmount, List<DiscountBenefit> discountBenefits) {
         int benefitWithoutGiftMenu = getBenefitWithoutGiftMenu(discountBenefits);
-        return totalPrice - benefitWithoutGiftMenu;
+        return totalAmount - benefitWithoutGiftMenu;
     }
 
-    private static int getBenefitWithoutGiftMenu(List<DiscountBenefit> discountBenefits) {
+    private int getBenefitWithoutGiftMenu(List<DiscountBenefit> discountBenefits) {
         return discountBenefits.stream()
                 .filter(discountBenefit -> !(discountBenefit instanceof GiftDiscountBenefit))
                 .mapToInt(DiscountBenefit::getDiscountAmount)
