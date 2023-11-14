@@ -19,9 +19,7 @@ public class OrderService {
     }
 
     public OrderResult getOrderResult(Order order, ReservationDate reservationDate) {
-        OrderResult orderResult = createOrderResult(order, reservationDate);
-
-        return orderResult;
+        return createOrderResult(order, reservationDate);
     }
 
     private OrderResult createOrderResult(Order order, ReservationDate reservationDate) {
