@@ -19,7 +19,7 @@ public class OrderService {
     }
 
     public OrderResult createOrderResult(Order order, ReservationDate reservationDate) {
-        return new OrderResult(getOrderMenus(order), getTotalAmount(order),
+        return new OrderResult(reservationDate, getOrderMenus(order), getTotalAmount(order),
                 getDiscountBenefits(order, reservationDate));
     }
 

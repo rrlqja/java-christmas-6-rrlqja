@@ -1,5 +1,6 @@
 package christmas.domain.orderresult;
 
+import christmas.domain.orderresult.strategy.OrderResultReservationDateStrategy;
 import christmas.domain.orderresult.strategy.OrderResultGiftMenuStrategy;
 import christmas.domain.orderresult.strategy.OrderResultOrderMenuStrategy;
 import christmas.domain.orderresult.strategy.OrderResultStrategy;
@@ -15,6 +16,7 @@ import java.util.List;
 public class OrderResultStrategiesFactory {
     public static OrderResultStrategies createStrategies() {
         List<OrderResultStrategy> strategies = new ArrayList<>();
+        strategies.add(new OrderResultReservationDateStrategy());
         strategies.add(new OrderResultOrderMenuStrategy());
         strategies.add(new OrderResultTotalAmountStrategy());
         strategies.add(new OrderResultGiftMenuStrategy());
