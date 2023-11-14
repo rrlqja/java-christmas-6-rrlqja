@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Order {
+    private static final int MINIMUM_AMOUNT = 10000;
     private static final int NO_DISCOUNT_BENEFIT = 0;
     private static final int DEFAULT_D_DAY_DISCOUNT_AMOUNT = 1000;
     private static final int DISCOUNT_INCREMENT = 100;
@@ -39,8 +40,12 @@ public class Order {
                 .sum();
     }
 
+    private boolean isUnderMinimumAmount() {
+        return getTotalAmount() < MINIMUM_AMOUNT;
+    }
+
     public Integer getDDayDiscountAmount(ReservationDate reservationDate) {
-        if (!reservationDate.isBeforeChristmas()) {
+        if (!reservationDate.isBeforeChristmas() || isUnderMinimumAmount()) {
             return NO_DISCOUNT_BENEFIT;
         }
         int DDayDiscountAmount = DEFAULT_D_DAY_DISCOUNT_AMOUNT;
@@ -51,6 +56,9 @@ public class Order {
     }
 
     public Integer getWeekDiscountAmount(MenuCategory menuCategory) {
+        if (isUnderMinimumAmount()) {
+            return NO_DISCOUNT_BENEFIT;
+        }
         return orders.entrySet()
                 .stream()
                 .filter(entry -> entry.getKey().getMenuCategory().equals(menuCategory))
@@ -59,7 +67,7 @@ public class Order {
     }
 
     public Integer getStarDayDiscountAmount(ReservationDate reservationDate) {
-        if (!reservationDate.isStarDay()) {
+        if (!reservationDate.isStarDay() || isUnderMinimumAmount()) {
             return NO_DISCOUNT_BENEFIT;
         }
 
