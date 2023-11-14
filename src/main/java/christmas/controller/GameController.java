@@ -8,7 +8,6 @@ import christmas.domain.orderresult.OrderResult;
 import christmas.input.handler.InputHandler;
 import christmas.output.handler.OutputHandler;
 import christmas.domain.order.OrderService;
-import christmas.utils.InputSupplier;
 
 import java.util.Map;
 
@@ -24,30 +23,13 @@ public class GameController {
     }
 
     public void startGame() {
-        ReservationDate reservationDate = getInput(this::getReservationDate);
-        Map<Menu, MenuQuantity> orders = getInput(this::getOrders);
+        ReservationDate reservationDate = inputHandler.getReservationDate();
+        Map<Menu, MenuQuantity> orders = inputHandler.getOrders();
+
         Order order = orderService.createOrder(orders);
 
         OrderResult orderResult = orderService.getOrderResult(order, reservationDate);
 
         outputHandler.showOrderResult(orderResult);
-    }
-
-    private ReservationDate getReservationDate() {
-        return inputHandler.getReservationDate();
-    }
-
-    private Map<Menu, MenuQuantity> getOrders() {
-        return inputHandler.getOrders();
-    }
-
-    private  <T> T getInput(InputSupplier<T> inputSupplier) {
-        while (true) {
-            try {
-                return inputSupplier.get();
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 }

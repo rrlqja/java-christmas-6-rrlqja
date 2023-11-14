@@ -5,6 +5,7 @@ import christmas.domain.menu.MenuQuantity;
 import christmas.domain.ReservationDate;
 import christmas.input.convertor.InputConvertor;
 import christmas.input.view.InputView;
+import christmas.utils.InputSupplier;
 
 import java.util.Map;
 
@@ -18,22 +19,32 @@ public class InputHandler {
     }
 
     public ReservationDate getReservationDate() {
-        String reservationDateInput = getReservationDateInput();
+        return getInput(() -> getReservationDateInput());
+    }
+
+    public Map<Menu, MenuQuantity> getOrders() {
+        return getInput(() -> getOrdersInput());
+    }
+
+    private ReservationDate getReservationDateInput() {
+        String reservationDateInput = inputView.getReservationDateInput();
 
         return inputConvertor.convertToReservationDate(reservationDateInput);
     }
 
-    public Map<Menu, MenuQuantity> getOrders() {
-        String ordersInput = getOrdersInput();
+    private Map<Menu, MenuQuantity> getOrdersInput() {
+        String ordersInput = inputView.getOrdersInput();
 
         return inputConvertor.convertToOrders(ordersInput);
     }
 
-    private String getReservationDateInput() {
-        return inputView.getReservationDateInput();
-    }
-
-    private String getOrdersInput() {
-        return inputView.getOrdersInput();
+    private  <T> T getInput(InputSupplier<T> inputSupplier) {
+        while (true) {
+            try {
+                return inputSupplier.get();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
