@@ -45,7 +45,7 @@ public class OrderResult {
     }
 
     public Badge getBadge() {
-        return Badge.valueOfBenefit(totalAmount);
+        return Badge.valueOfBenefit(getTotalBenefit(discountBenefits));
     }
 
     private GiftMenu getGiftMenu(Integer totalAmount) {
