@@ -8,9 +8,13 @@ public class OrderResultGiftMenuStrategy implements OrderResultStrategy {
     private static final String LINE_BREAK = System.lineSeparator();
     @Override
     public String output(OrderResult orderResult) {
-        StringBuilder sb = new StringBuilder();
         GiftMenu giftMenu = orderResult.getGiftMenu();
 
+        return getOutput(giftMenu);
+    }
+
+    private String getOutput(GiftMenu giftMenu) {
+        StringBuilder sb = new StringBuilder();
         return sb.append(TITLE)
                 .append(LINE_BREAK)
                 .append(giftMenu.toString())

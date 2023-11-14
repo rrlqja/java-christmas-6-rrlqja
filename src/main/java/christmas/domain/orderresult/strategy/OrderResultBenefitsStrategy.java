@@ -9,10 +9,14 @@ public class OrderResultBenefitsStrategy implements OrderResultStrategy {
     private static final String LINE_BREAK = System.lineSeparator();
     @Override
     public String output(OrderResult orderResult) {
-        StringBuilder sb = new StringBuilder();
         List<String> benefits = orderResult.getDiscountBenefits();
 
-        sb.append(LINE_BREAK).append(TITLE)
+        return getOutput(benefits);
+    }
+
+    private String getOutput(List<String> benefits) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(TITLE)
                 .append(LINE_BREAK);
         for (String benefit : benefits) {
             sb.append(benefit)

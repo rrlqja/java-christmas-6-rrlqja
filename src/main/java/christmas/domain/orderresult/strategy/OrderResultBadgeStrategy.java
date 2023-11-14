@@ -9,9 +9,13 @@ public class OrderResultBadgeStrategy implements OrderResultStrategy {
 
     @Override
     public String output(OrderResult orderResult) {
-        StringBuilder sb = new StringBuilder();
         Badge badge = orderResult.getBadge();
 
+        return getOutput(badge);
+    }
+
+    private String getOutput(Badge badge) {
+        StringBuilder sb = new StringBuilder();
         return sb.append(TITLE)
                 .append(LINE_BREAK)
                 .append(badge.getBadge())

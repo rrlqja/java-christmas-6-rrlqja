@@ -11,13 +11,19 @@ public class OrderResultTotalAmountStrategy implements OrderResultStrategy {
 
     @Override
     public String output(OrderResult orderResult) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(TITLE)
-                .append(LINE_BREAK)
-                .append(formatNumber(orderResult.getTotalAmount()))
-                .append(CURRENCY_SUFFIX)
-                .append(LINE_BREAK);
+        Integer totalAmount = orderResult.getTotalAmount();
 
-        return sb.toString();
+        return getOutput(totalAmount);
+    }
+
+    private String getOutput(Integer totalAmount) {
+        StringBuilder sb = new StringBuilder();
+
+        return sb.append(TITLE)
+                .append(LINE_BREAK)
+                .append(formatNumber(totalAmount))
+                .append(CURRENCY_SUFFIX)
+                .append(LINE_BREAK)
+                .toString();
     }
 }

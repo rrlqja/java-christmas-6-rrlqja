@@ -12,9 +12,13 @@ public class OrderResultTotalBenefitStrategy implements OrderResultStrategy {
 
     @Override
     public String output(OrderResult orderResult) {
-        StringBuilder sb = new StringBuilder();
         Integer totalBenefit = orderResult.getTotalBenefit();
 
+        return getOutput(totalBenefit);
+    }
+
+    private String getOutput(Integer totalBenefit) {
+        StringBuilder sb = new StringBuilder();
         return sb.append(TITLE)
                 .append(LINE_BREAK)
                 .append(CURRENCY_PREFIX)

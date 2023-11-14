@@ -10,9 +10,13 @@ public class OrderResultFinalAmountStrategy implements OrderResultStrategy {
     private static final String CURRENCY_SUFFIX = "원";
     @Override
     public String output(OrderResult orderResult) {
-        StringBuilder sb = new StringBuilder();
         Integer finalPrice = orderResult.getFinalAmount();
 
+        return getOutput(finalPrice);
+    }
+
+    private String getOutput(Integer finalPrice) {
+        StringBuilder sb = new StringBuilder();
         return sb.append(TITLE)
                 .append(LINE_BREAK)
                 .append(formatNumber(finalPrice))
