@@ -28,7 +28,7 @@ public class GameController {
 
         Order order = orderService.createOrder(orders);
 
-        OrderResult orderResult = orderService.getOrderResult(order, reservationDate);
+        OrderResult orderResult = orderService.createOrderResult(order, reservationDate);
 
         outputHandler.showOrderResult(orderResult);
     }

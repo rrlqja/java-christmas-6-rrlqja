@@ -18,12 +18,9 @@ public class OrderService {
         return new Order(orders);
     }
 
-    public OrderResult getOrderResult(Order order, ReservationDate reservationDate) {
-        return createOrderResult(order, reservationDate);
-    }
-
-    private OrderResult createOrderResult(Order order, ReservationDate reservationDate) {
-        return new OrderResult(getOrderMenus(order), getTotalAmount(order), getDiscountBenefits(order, reservationDate));
+    public OrderResult createOrderResult(Order order, ReservationDate reservationDate) {
+        return new OrderResult(getOrderMenus(order), getTotalAmount(order),
+                getDiscountBenefits(order, reservationDate));
     }
 
     private List<OrderMenuDto> getOrderMenus(Order order) {
