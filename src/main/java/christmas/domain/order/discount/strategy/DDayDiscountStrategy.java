@@ -6,11 +6,11 @@ import christmas.domain.order.discount.discountbenefit.DDAyDiscountBenefit;
 import christmas.domain.order.discount.discountbenefit.DiscountBenefit;
 import christmas.domain.order.discount.discountbenefit.NoDiscountBenefit;
 
-public class ChristmasDiscountStrategy implements DiscountStrategy {
+public class DDayDiscountStrategy implements DiscountStrategy {
     private static final int DEFAULT_DISCOUNT_AMOUNT = 0;
     private final ReservationDate reservationDate;
 
-    public ChristmasDiscountStrategy(ReservationDate reservationDate) {
+    public DDayDiscountStrategy(ReservationDate reservationDate) {
         this.reservationDate = reservationDate;
     }
 
