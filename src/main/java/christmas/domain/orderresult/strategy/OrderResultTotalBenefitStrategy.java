@@ -19,10 +19,12 @@ public class OrderResultTotalBenefitStrategy implements OrderResultStrategy {
 
     private String getOutput(Integer totalBenefit) {
         StringBuilder sb = new StringBuilder();
-        return sb.append(TITLE)
-                .append(LINE_BREAK)
-                .append(CURRENCY_PREFIX)
-                .append(formatNumber(totalBenefit))
+        sb.append(TITLE)
+                .append(LINE_BREAK);
+        if (totalBenefit > 0) {
+            sb.append(CURRENCY_PREFIX);
+        }
+        return sb.append(formatNumber(totalBenefit))
                 .append(CURRENCY_SUFFIX)
                 .append(LINE_BREAK)
                 .toString();
